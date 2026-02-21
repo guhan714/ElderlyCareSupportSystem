@@ -1,0 +1,28 @@
+﻿@model ElderlyCareSupportSystem.Application.Models.ViewModels.CompanyViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html lang="eng">
+<head>
+    <title>Elderly Care Support - Registration</title>
+</head>
+<body>
+<div class="container-fluid p-3">
+    <div class="container p-3">
+        <form id="CompanyRegistrationForm" autocomplete="off">
+            @Html.AntiForgeryToken()
+            
+            <div class="col-md-12">
+                <div class="fw-bold">
+                    <h2>Register</h2>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
