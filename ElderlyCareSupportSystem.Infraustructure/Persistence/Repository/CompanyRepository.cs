@@ -1,41 +1,39 @@
-﻿using ElderlyCareSupport.Domain.Entities;
+using ElderlyCareSupport.Domain.Entities;
 using ElderlyCareSupportSystem.Application.Interface.Repository;
-using Microsoft.EntityFrameworkCore;
+using ElderlyCareSupportSystem.Infrastructure.Persistence.Data;
 
-namespace ElderlyCareSupportSystem.Infraustructure.Persistence.Repository;
+namespace ElderlyCareSupportSystem.Infrastructure.Persistence.Repository;
 
 public sealed class CompanyRepository : ICompanyRepository
 {
-    private readonly ApplicationDbContext _context;
+    private readonly ElderlyCareSupportDbContext _dbContext;
 
-    public CompanyRepository(ApplicationDbContext context)
+    public CompanyRepository(ElderlyCareSupportDbContext dbContext)
     {
-        _context = context;
+        _dbContext = dbContext;
     }
 
-    public async Task<Company?> AddAsync(Company company)
+    public async Task<Company> AddAsync(Company company)
     {
-        await _context.Companies.AddAsync(company);
-        await _context.SaveChangesAsync();
+        await _dbContext.Companies.AddAsync(company);
+        await _dbContext.SaveChangesAsync();
         return company;
     }
 
-    public async Task<Company?> UpdateAsync(Company company)
+    public Task<Company?> UpdateAsync(Company company)
     {
-        _context.Update(company);
-        await _context.SaveChangesAsync();
-        return company;
+        throw new NotImplementedException();
     }
 
-    public async Task<Company?> GetAsync(Guid companyId)
+    public ValueTask<Company?> GetAsync(Guid companyId)
     {
-        return await _context.Companies.FindAsync(companyId);
+        return _dbContext.Companies.FindAsync(companyId);
     }
 
-    public async Task<Company?> DeleteAsync(Company company)
+    public async Task<Company> DeleteAsync(Company company)
     {
-        _context.Companies.Remove(company);
-        await _context.SaveChangesAsync();
+        _dbContext.Companies.Remove(company);
+        await _dbContext.SaveChangesAsync();
         return company;
     }
 }

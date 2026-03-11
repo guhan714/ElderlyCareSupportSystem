@@ -1,10 +1,9 @@
 ﻿using ElderlyCareSupport.Domain.Entities;
 using ElderlyCareSupportSystem.Application.Implementation.Services;
 using ElderlyCareSupportSystem.Application.Interface.Repository;
-using ElderlyCareSupportSystem.Application.Interface.Services;
 using ElderlyCareSupportSystem.Application.Mappers;
 using ElderlyCareSupportSystem.Application.Models.ViewModels;
-using Moq;
+using Imposter.Abstractions;
 using Shouldly;
 
 namespace ElderlyCareSupportSystem.Tests.Services;
@@ -13,15 +12,15 @@ public sealed class CompanyServiceTest
 {
     
     private readonly CompanyService _sut;
-    private readonly Mock<ICompanyRepository> _companyRepository;
-    private readonly Mock<CompanyMapper> _companyMapper;
+    private readonly ICompanyRepositoryImposter _companyRepository;
+    private readonly CompanyMapperImposter _companyMapper;
 
 
     public CompanyServiceTest()
     {
-        _companyRepository = new  Mock<ICompanyRepository>();
-        _companyMapper = new  Mock<CompanyMapper>();
-        _sut = new CompanyService(_companyRepository.Object,  _companyMapper.Object);
+        _companyRepository = ICompanyRepository.Imposter();
+        _companyMapper = CompanyMapper.Imposter();
+        _sut = new CompanyService(_companyRepository.Instance(),  _companyMapper.Instance());
     }
 
 
@@ -40,7 +39,7 @@ public sealed class CompanyServiceTest
             Email = "sample@gmail.com"
         };
 
-        _companyRepository.Setup(a => a.GetAsync(guid)).ReturnsAsync(company);
+        _companyRepository.GetAsync(guid).ReturnsAsync(company);
 
         // Act
         
@@ -54,6 +53,36 @@ public sealed class CompanyServiceTest
         result.Data.Id.ShouldBe(company.Id);
         result.Data.Name.ShouldBe(company.Name);
         result.Data.Email.ShouldBe(company.Email);
+    }
+
+    [Fact]
+    public async Task GetCompanyAsync_ShouldReturnNull_WhenCompanyDoesNotExist()
+    {
+        //  Arrange
+        _companyRepository.GetAsync(Arg<Guid>.Any()).Returns(null);
+        
+        //  Act
+        var result = await _sut.GetCompanyAsync(Guid.NewGuid());
+        
+        //  Assert
+        result.IsSuccess.ShouldBeFalse();
+        result.Data.ShouldBeNull();
+    }
+    
+    
+    [Fact]
+    public async Task GetCompanyAsync_ShouldReturnNull_WhenCompanyIdIsEmpty()
+    {
+        // Arrange
+
+        // Act
+        var result = await _sut.GetCompanyAsync(Guid.Empty);
+        
+        result.IsSuccess.ShouldBeFalse();
+        result.Message.ShouldContain("Company id cannot be empty");
+        
+        _companyRepository.GetAsync(Arg<Guid>.Any()).Called(Count.Never());
+        
     }
     
 }

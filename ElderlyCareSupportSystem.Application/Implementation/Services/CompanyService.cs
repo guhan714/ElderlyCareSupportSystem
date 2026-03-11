@@ -1,5 +1,4 @@
-﻿using ElderlyCareSupport.Domain.Entities;
-using ElderlyCareSupportSystem.Application.Interface.Repository;
+﻿using ElderlyCareSupportSystem.Application.Interface.Repository;
 using ElderlyCareSupportSystem.Application.Interface.Services;
 using ElderlyCareSupportSystem.Application.Mappers;
 using ElderlyCareSupportSystem.Application.Models.Reponse;
@@ -59,6 +58,9 @@ public sealed class CompanyService : ICompanyService
     {
         try
         {
+            if(companyId == Guid.Empty)
+                return Result<CompanyViewModel>.Fail("Company id cannot be empty");
+            
             var result = await _companyRepository.GetAsync(companyId);
             
             if(result is null)

@@ -19,6 +19,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Unit", "Unit", "{734D303C-8
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElderlyCareSupportSystem.Tests", "ElderlyCareSupportSystem.Tests\ElderlyCareSupportSystem.Tests.csproj", "{DDF33A1E-5D50-4627-B1AD-E718D5F78C09}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Benchmarks", "Benchmarks", "{88564AAF-6256-46B1-83FA-C789F509A144}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElderlyCareSupport.Benchmarks", "ElderlyCareSupport.Benchmarks\ElderlyCareSupport.Benchmarks.csproj", "{A817994E-FAE4-4904-996F-807C29EBBC79}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +49,10 @@ Global
 		{DDF33A1E-5D50-4627-B1AD-E718D5F78C09}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DDF33A1E-5D50-4627-B1AD-E718D5F78C09}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DDF33A1E-5D50-4627-B1AD-E718D5F78C09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A817994E-FAE4-4904-996F-807C29EBBC79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A817994E-FAE4-4904-996F-807C29EBBC79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A817994E-FAE4-4904-996F-807C29EBBC79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A817994E-FAE4-4904-996F-807C29EBBC79}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -56,6 +64,7 @@ Global
 		{0536A196-7C68-4B5E-8275-2BEE41252605} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{734D303C-8AFA-4099-A920-6E78832177DD} = {95567BEB-9459-40B9-B993-2BEDA4AAF46E}
 		{DDF33A1E-5D50-4627-B1AD-E718D5F78C09} = {734D303C-8AFA-4099-A920-6E78832177DD}
+		{A817994E-FAE4-4904-996F-807C29EBBC79} = {88564AAF-6256-46B1-83FA-C789F509A144}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A961C538-03AB-43D5-A255-6D82BA32C4D5}
