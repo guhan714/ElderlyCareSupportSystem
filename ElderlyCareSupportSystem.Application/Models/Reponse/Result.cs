@@ -1,6 +1,4 @@
-﻿using ElderlyCareSupport.Domain.Entities;
-
-namespace ElderlyCareSupportSystem.Application.Models.Reponse;
+﻿namespace ElderlyCareSupportSystem.Application.Models.Reponse;
 
 public class Result
 {
