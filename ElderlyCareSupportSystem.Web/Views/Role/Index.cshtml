@@ -1,0 +1,69 @@
+@model List<ElderlyCareSupportSystem.Application.Models.ViewModels.RoleViewModel>
+@{
+    Layout = "_Layout";
+    var counter = 1;
+}
+
+<div
+    class="mt-6 bg-white dark:bg-gray-900 shadow-md rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+
+    <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+        <h2 class="text-lg font-semibold text-gray-800 dark:text-gray-200">
+            Roles List
+        </h2>
+    </div>
+    <div class="overflow-x-auto">
+        <table class="w-full text-sm text-left text-gray-600 dark:text-gray-300">
+            <thead
+                class="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 uppercase text-xs tracking-wider">
+            <tr>
+                <th class="px-6 py-3 w-5">S.No</th>
+                <th class="px-6 py-3 w-10">Code</th>
+                <th class="px-6 py-3 w-15">Name</th>
+                <th class="px-6 py-3 w-60">Description</th>
+                <th class="px-6 py-3 text-center w-10">Options</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var role in Model)
+            {
+                <tr class="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 transition">
+
+                    <td class="px-6 py-4 font-medium text-gray-800 dark:text-gray-200">
+                        @counter
+                    </td>
+
+                    <td class="px-6 py-4">
+                            <span class="px-2 py-1 text-xs font-semibold bg-blue-100 text-blue-700 rounded-lg">
+                                @role.Code
+                            </span>
+                    </td>
+
+                    <td class="px-6 py-4 font-semibold">
+                        @role.Name
+                    </td>
+
+                    <td class="px-6 py-4 text-gray-500">
+                        @role.Description
+                    </td>
+
+                    <td class="px-6 py-4 flex justify-center gap-2">
+                        <button
+                            class="px-3 py-1 text-xs font-medium bg-yellow-100 text-yellow-700 rounded-lg hover:bg-yellow-200 transition cursor-pointer">
+                            Edit
+                        </button>
+
+                        <button
+                            class="px-3 py-1 text-xs font-medium bg-red-100 text-red-700 rounded-lg hover:bg-red-200 transition cursor-pointer">
+                            Delete
+                        </button>
+                    </td>
+
+                </tr>
+
+                counter++;
+            }
+            </tbody>
+        </table>
+    </div>
+</div>

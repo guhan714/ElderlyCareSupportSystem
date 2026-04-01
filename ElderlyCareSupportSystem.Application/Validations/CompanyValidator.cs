@@ -8,7 +8,7 @@ public class CompanyValidator : AbstractValidator<CompanyViewModel>
     public CompanyValidator()
     {
         RuleFor(x => x.Name).NotEmpty().WithMessage("Name is required");
-        RuleFor(x => x.Address1).NotEmpty().WithMessage("Address1 is required");
+        RuleFor(x => x.AddressLine1).NotEmpty().WithMessage("Address1 is required");
         RuleFor(x => x.AddressLine2).NotEmpty().WithMessage("AddressLine2 is required");
         RuleFor(x => x.City).NotEmpty().WithMessage("City is required");
         RuleFor(x => x.State).NotEmpty().WithMessage("State is required");
@@ -16,5 +16,8 @@ public class CompanyValidator : AbstractValidator<CompanyViewModel>
         RuleFor(x => x.Email).NotEmpty().WithMessage("Email is required").EmailAddress();
         RuleFor(x => x.PhoneNumber).NotEmpty().WithMessage("PhoneNumber is required");
         RuleFor(x => x.RegistrationNumber).NotEmpty().WithMessage("RegistrationNumber is required");
+        RuleFor(x => x.Website).NotEmpty().WithMessage("Website is required");
+        RuleFor(x=> x.UserName).NotEmpty().WithMessage("UserName is required");
+        RuleFor(x => x.Password).NotEmpty().WithMessage("Password is required").MinimumLength(6).WithMessage("Password has to be minimum 6 characters");
     }
 }

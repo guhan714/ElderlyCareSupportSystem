@@ -1,3 +1,4 @@
+using Dapper;
 using ElderlyCareSupport.Domain.Entities;
 using ElderlyCareSupportSystem.Application.Interface.Repository;
 using ElderlyCareSupportSystem.Infrastructure.Persistence.Data;
@@ -7,10 +8,11 @@ namespace ElderlyCareSupportSystem.Infrastructure.Persistence.Repository;
 public sealed class CompanyRepository : ICompanyRepository
 {
     private readonly ElderlyCareSupportDbContext _dbContext;
-
-    public CompanyRepository(ElderlyCareSupportDbContext dbContext)
+    private readonly DapperDbContext _dapperDbContext;
+    public CompanyRepository(ElderlyCareSupportDbContext dbContext, DapperDbContext dapperDbContext)
     {
         _dbContext = dbContext;
+        _dapperDbContext = dapperDbContext;
     }
 
     public async Task<Company> AddAsync(Company company)
@@ -20,14 +22,19 @@ public sealed class CompanyRepository : ICompanyRepository
         return company;
     }
 
-    public Task<Company?> UpdateAsync(Company company)
+    public async Task<Company?> UpdateAsync(Company company)
     {
-        throw new NotImplementedException();
+        _dbContext.Companies.Update(company);
+        await _dbContext.SaveChangesAsync();
+        return company;
     }
 
-    public ValueTask<Company?> GetAsync(Guid companyId)
+    public async Task<Company?> GetAsync(Guid companyId)
     {
-        return _dbContext.Companies.FindAsync(companyId);
+        using var connection = _dapperDbContext.CreateConnection();
+        return await connection.QueryFirstOrDefaultAsync<Company>("""
+                                                            SELECT * FROM "Companies" WHERE ID = @Id, new { Id = companyId });
+                                                            """);
     }
 
     public async Task<Company> DeleteAsync(Company company)

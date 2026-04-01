@@ -1,0 +1,71 @@
+@model ElderlyCareSupportSystem.Application.Models.ViewModels.LoginViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html lang="en" class="h-full bg-gray-900">
+<head>
+  <title>Login</title>
+  <link rel="stylesheet" href="~/css/site.css"/>
+</head>
+<body class="h-full">
+<div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+  <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+    <img src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company" class="mx-auto h-10 w-auto" />
+    <h2 class="mt-10 text-center text-2xl/9 font-bold tracking-tight text-white">Sign in to your account</h2>
+  </div>
+
+  <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+    <form id="LoginForm" action="#" method="POST" class="space-y-6">
+      @Html.AntiForgeryToken()
+      <div>
+        <label  class="block text-sm/6 font-medium text-gray-100">Email address</label>
+        <div class="mt-2">
+          <input type="email" name="email" asp-for="UserName" autocomplete="off" class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"/>
+        </div>
+      </div>
+
+      <div>
+        <div class="flex items-center justify-between">
+          <label class="block text-sm/6 font-medium text-gray-100">Password</label>
+          <div class="text-sm">
+            <a href="#" class="font-semibold text-indigo-400 hover:text-indigo-300">Forgot password?</a>
+          </div>
+        </div>
+        <div class="mt-2">
+          <input type="password" name="password" asp-for="Password" class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"/>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="Login" class="w-full px-6 py-2.5 rounded-md text-white text-sm cursor-pointer font-medium tracking-wider border-0 outline-0 bg-linear-to-br from-fuchsia-600 via-purple-600 to-violet-600 hover:brightness-110">Login</button>
+      </div>
+    </form>
+  </div>
+</div>
+@{ await Html.RenderPartialAsync("_Loader"); }
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/sweet-alert/sweetalert2.js"></script>
+<script src="~/js/Components/loadercomponent.js"></script>
+<script src="~/js/Components/alertcomponent.js"></script>
+<script src="~/js/Pages/Login/Login.js"></script>
+
+<script>
+  $(document).on('click', '#Login', function (event) {
+    startLoader();
+    event.preventDefault();
+    const loginData = getLoginData();
+    const validation = validateLoginData(loginData);
+
+    if(!validation) {
+      stopLoader();
+      return;
+    }
+
+    login('@Url.Action("Login", "Auth")', loginData);
+  });
+</script>
+</body>
+</html>

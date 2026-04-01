@@ -24,27 +24,5 @@ namespace ElderlyCareSupportSystem.Web.Controllers
         {
             return View();
         }
-
-        public IActionResult CompanyRegistration()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(CompanyViewModel company)
-        {
-            var validationResult = await _companyValidator.ValidateAsync(company);
-            if(!validationResult.IsValid)
-                return BadRequest(new {isValid = validationResult.IsValid, validationErrors = validationResult.Errors
-                    .Select(e => new { field = e.PropertyName, message = e.ErrorMessage })});  
-            
-            var registrationResult = await _companyService.CreateCompanyAsync(company);
-            if (!registrationResult.IsSuccess)
-                return BadRequest(new { success = false, message = registrationResult.Message });
-            
-            _logger.LogInformation("Successfully registered a new company");
-            return Ok(new { success = true });
-        }
     }
 }

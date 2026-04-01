@@ -6,6 +6,6 @@ public interface ICompanyRepository
 {
     Task<Company> AddAsync(Company company);
     Task<Company?> UpdateAsync(Company company);
-    ValueTask<Company?> GetAsync(Guid companyId);
+    Task<Company?> GetAsync(Guid companyId);
     Task<Company> DeleteAsync(Company company);
 }

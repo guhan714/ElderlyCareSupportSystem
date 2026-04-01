@@ -23,6 +23,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\ElderlyCareSupportSystem.Application\ElderlyCareSupportSystem.Application.csproj" />
+      <ProjectReference Include="..\ElderlyCareSupportSystem.Web\ElderlyCareSupportSystem.Web.csproj" />
     </ItemGroup>
 
 </Project>
