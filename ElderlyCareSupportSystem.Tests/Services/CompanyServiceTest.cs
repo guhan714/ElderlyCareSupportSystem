@@ -5,6 +5,7 @@ using ElderlyCareSupportSystem.Application.Mappers.DataTransfer;
 using ElderlyCareSupportSystem.Application.Mappers.Domain.DomainMapper;
 using ElderlyCareSupportSystem.Application.Models.ViewModels;
 using ElderlyCareSupportSystem.Tests.Seed.Domain;
+using ElderlyCareSupportSystem.Tests.Seed.DTO;
 using ElderlyCareSupportSystem.Tests.TestUtility;
 using Imposter.Abstractions;
 using Shouldly;
@@ -82,6 +83,26 @@ public sealed class CompanyServiceTest
         
         _companyRepository.GetAsync(Arg<Guid>.Any()).Called(Count.Never());
         
+    }
+
+
+    [Fact]
+    public async Task CreateCompanyAsync_ShouldCreateCompany_WhenCompanyIsValid()
+    {
+        //  Arrange
+        var company = CompanySeed.GetCompanySeed();
+        var user = UserRequestSeed.Seed();
+        var userResult = UserRequestSeed.SeedResult();
+        _companyRepository.AddAsync(company).ReturnsAsync(company);
+        _userService.AddUser(user).ReturnsAsync(userResult);
+        
+        //  Act
+        var companyInput = CompanyDtoSeed.Seed();
+        var result = await _sut.CreateCompanyAsync(companyInput);
+        
+        //  Assert
+        result.IsSuccess.ShouldBeTrue();
+        result.Message.ShouldContain("Company created successfully");
     }
     
 }

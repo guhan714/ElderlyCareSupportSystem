@@ -1,7 +1,6 @@
 using ElderlyCareSupportSystem.Application.Interface.Repository;
 using ElderlyCareSupportSystem.Application.Interface.Security;
 using ElderlyCareSupportSystem.Application.Interface.Services;
-using ElderlyCareSupportSystem.Application.Models.DTO;
 using ElderlyCareSupportSystem.Application.Models.Reponse;
 using ElderlyCareSupportSystem.Application.Models.ViewModels;
 
