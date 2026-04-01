@@ -1,4 +1,4 @@
-using ElderlyCareSupport.Extensions.Constants;
+using ElderlyCareSupportSystem.Application.Constants;
 using MailKit.Net.Smtp;
 using MimeKit;
 using MimeKit.Text;

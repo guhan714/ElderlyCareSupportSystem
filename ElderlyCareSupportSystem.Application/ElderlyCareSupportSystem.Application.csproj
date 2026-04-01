@@ -7,6 +7,8 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="Facet" Version="5.8.6" />
+      <PackageReference Include="Facet.Extensions" Version="5.8.6" />
       <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.1.1" />
       <PackageReference Include="Riok.Mapperly" Version="5.0.0-next.2" />
     </ItemGroup>

@@ -2,12 +2,11 @@
 using ElderlyCareSupportSystem.Application.Models.ViewModels;
 using Riok.Mapperly.Abstractions;
 
-namespace ElderlyCareSupportSystem.Application.Mappers;
+namespace ElderlyCareSupportSystem.Application.Mappers.DataTransfer;
 
 [Mapper]
-public partial class CompanyMapper
+public partial class DtoMapper
 {
-    public partial Company CompanyVmToCompany(CompanyViewModel companyViewModel);
-    public partial CompanyViewModel CompanyToCompanyViewModel(Company company);
+    public partial CompanyViewModel ToCompany(Company company);
 }
 

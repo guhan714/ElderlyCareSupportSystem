@@ -1,4 +1,4 @@
-namespace ElderlyCareSupportSystem.Infrastructure.Security.Contract;
+namespace ElderlyCareSupportSystem.Application.Interface.Security;
 
 public interface IHashingService
 {

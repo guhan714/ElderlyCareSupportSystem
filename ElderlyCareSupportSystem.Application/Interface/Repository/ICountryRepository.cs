@@ -1,6 +1,8 @@
+using ElderlyCareSupport.Domain.Entities;
+
 namespace ElderlyCareSupportSystem.Application.Interface.Repository;
 
-public class ICountryRepository
+public interface ICountryRepository
 {
-    
+    Task<List<Country>> GetListAsync();
 }

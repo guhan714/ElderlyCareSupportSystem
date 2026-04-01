@@ -1,95 +1,92 @@
-﻿using ElderlyCareSupportSystem.Application.Interface.Repository;
+﻿using ElderlyCareSupport.Domain.Entities;
+using ElderlyCareSupportSystem.Application.Interface.Repository;
 using ElderlyCareSupportSystem.Application.Interface.Services;
-using ElderlyCareSupportSystem.Application.Mappers;
+using ElderlyCareSupportSystem.Application.Mappers.Domain.DomainMapper;
+using ElderlyCareSupportSystem.Application.Models.DTO;
 using ElderlyCareSupportSystem.Application.Models.Reponse;
 using ElderlyCareSupportSystem.Application.Models.ViewModels;
+using DtoMapper = ElderlyCareSupportSystem.Application.Mappers.DataTransfer.DtoMapper;
 
 namespace ElderlyCareSupportSystem.Application.Implementation.Services;
 
 public sealed class CompanyService : ICompanyService
 {
     private readonly ICompanyRepository _companyRepository;
-    private readonly CompanyMapper _companyMapper;
-    public CompanyService(ICompanyRepository companyRepository, CompanyMapper companyMapper)
+    private readonly IUserService _userService;
+    private readonly DomainMapper _domainMapper;
+    private readonly DtoMapper _dtoMapper;
+
+    public CompanyService(ICompanyRepository companyRepository, DomainMapper domainMapper, DtoMapper dtoMapper, IUserService userService)
     {
         _companyRepository = companyRepository;
-        _companyMapper = companyMapper;
+        _domainMapper = domainMapper;
+        _dtoMapper = dtoMapper;
+        _userService = userService;
     }
 
     public async Task<Result> CreateCompanyAsync(CompanyViewModel company)
     {
-        try
+        var companyEntity = _domainMapper.ToCompany(company);
+        companyEntity.Id = Guid.NewGuid();
+
+        var user = new UserDto()
         {
-            var companyEntity = _companyMapper.CompanyVmToCompany(company);
-            companyEntity.Id = Guid.NewGuid();
-            
-            var result = await _companyRepository.AddAsync(companyEntity); 
-            
-            if(result is null)
-                return Result.Fail("Could not create company");
-            
-            return Result.Success("Company created successfully");
-        }
-        catch (Exception e)
-        {
-            return Result.Fail(e.Message);
-        }
+            UserId = Guid.NewGuid(),
+            UserName = company.UserName,
+            Email = company.Email,
+            PasswordHash = company.Password,
+            CompanyName = companyEntity.Name,
+            CreatedByUserId = Guid.Parse("2467ff03-1578-47dd-9330-a8dcf035882c"),
+            ModifiedByUserId = Guid.Parse("2467ff03-1578-47dd-9330-a8dcf035882c")
+        };
+        
+        companyEntity.CreatedById = user.CreatedByUserId;
+        companyEntity.CreatedOn = DateTime.UtcNow;
+        companyEntity.UpdatedById = user.CreatedByUserId;
+        companyEntity.UpdatedOn = DateTime.UtcNow;
+        
+        await _companyRepository.AddAsync(companyEntity);
+        
+        var userCreation = await _userService.AddUser(user);
+        if(!userCreation.IsSuccess)
+            return Result.Fail("Could not create user");
+
+        return Result.Success("Company created successfully");
     }
 
     public async Task<Result> UpdateCompanyAsync(CompanyViewModel company)
     {
-        try
-        {
-            var companyEntity = _companyMapper.CompanyVmToCompany(company);
-            var result = await _companyRepository.UpdateAsync(companyEntity); 
-            
-            if(result is null)
-                return Result.Fail("Could not update company");
-            
-            return Result.Success("Company updated successfully");
-        }
-        catch (Exception e)
-        {
-            return Result.Fail(e.Message);
-        }
+        var companyEntity = _domainMapper.ToCompany(company);
+        var result = await _companyRepository.UpdateAsync(companyEntity);
+
+        if (result is null)
+            return Result.Fail("Could not update company");
+
+        return Result.Success("Company updated successfully");
     }
 
     public async Task<Result<CompanyViewModel>> GetCompanyAsync(Guid companyId)
     {
-        try
-        {
-            if(companyId == Guid.Empty)
-                return Result<CompanyViewModel>.Fail("Company id cannot be empty");
-            
-            var result = await _companyRepository.GetAsync(companyId);
-            
-            if(result is null)
-                return Result<CompanyViewModel>.Fail("Company not found");
-            
-            var mappedResult = _companyMapper.CompanyToCompanyViewModel(result);
-            return Result<CompanyViewModel>.Success(mappedResult);
-        }
-        catch (Exception e)
-        {
-            return Result<CompanyViewModel>.Fail(e.Message);
-        }
+        if (companyId == Guid.Empty)
+            return Result<CompanyViewModel>.Fail("Company id cannot be empty");
+
+        var result = await _companyRepository.GetAsync(companyId);
+
+        if (result is null)
+            return Result<CompanyViewModel>.Fail("Company not found");
+
+        var mappedResult = _dtoMapper.ToCompany(result);
+        return Result<CompanyViewModel>.Success(mappedResult);
     }
 
-    public async Task<Result> DeleteCompanyAsync(CompanyViewModel company)
+    public async Task<Result> DeleteCompanyAsync(Guid id)
     {
-        try
-        {
-            var companyEntity = _companyMapper.CompanyVmToCompany(company);
-            var result = await _companyRepository.DeleteAsync(companyEntity); 
-            
-            if(result is null)
-                return Result.Fail("Could not delete company");
-            
-            return Result.Success("Company deleted successfully");
-        }
-        catch (Exception e)
-        {
-            return Result.Fail(e.Message);
-        }
+        var company = await _companyRepository.GetAsync(id);
+        if (company is null)
+            return Result.Fail("Company not found");
+
+        var result = await _companyRepository.DeleteAsync(company);
+
+        return Result.Success("Company deleted successfully");
     }
 }

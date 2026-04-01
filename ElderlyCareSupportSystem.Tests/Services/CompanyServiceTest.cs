@@ -1,8 +1,11 @@
-﻿using ElderlyCareSupport.Domain.Entities;
-using ElderlyCareSupportSystem.Application.Implementation.Services;
+﻿using ElderlyCareSupportSystem.Application.Implementation.Services;
 using ElderlyCareSupportSystem.Application.Interface.Repository;
-using ElderlyCareSupportSystem.Application.Mappers;
+using ElderlyCareSupportSystem.Application.Interface.Services;
+using ElderlyCareSupportSystem.Application.Mappers.DataTransfer;
+using ElderlyCareSupportSystem.Application.Mappers.Domain.DomainMapper;
 using ElderlyCareSupportSystem.Application.Models.ViewModels;
+using ElderlyCareSupportSystem.Tests.Seed.Domain;
+using ElderlyCareSupportSystem.Tests.TestUtility;
 using Imposter.Abstractions;
 using Shouldly;
 
@@ -13,14 +16,18 @@ public sealed class CompanyServiceTest
     
     private readonly CompanyService _sut;
     private readonly ICompanyRepositoryImposter _companyRepository;
-    private readonly CompanyMapperImposter _companyMapper;
+    private readonly IUserServiceImposter _userService;
+    private readonly DomainMapperImposter _domainMapperImposter;
+    private readonly DtoMapperImposter _dtoMapperImposter;
 
 
     public CompanyServiceTest()
     {
+        _userService = IUserService.Imposter();
         _companyRepository = ICompanyRepository.Imposter();
-        _companyMapper = CompanyMapper.Imposter();
-        _sut = new CompanyService(_companyRepository.Instance(),  _companyMapper.Instance());
+        _domainMapperImposter = DomainMapper.Imposter();
+        _dtoMapperImposter = DtoMapper.Imposter();
+        _sut = new CompanyService(_companyRepository.Instance(),  _domainMapperImposter.Instance(), _dtoMapperImposter.Instance(), _userService.Instance());
     }
 
 
@@ -28,16 +35,8 @@ public sealed class CompanyServiceTest
     public async Task GetCompanyAsync_ShouldReturnCompany_WhenCompanyExists()
     {
         // arrange
-        var guid = Guid.NewGuid();
-        var company = new Company()
-        {
-            Id = guid,
-            Name = "Mappa Studios",
-            AddressLine1 = "123 Main St",
-            AddressLine2 = "123 Main St",
-            AddressLine3 = "123 Main St",
-            Email = "sample@gmail.com"
-        };
+        var guid = TestConstants.CompanyId;
+        var company = CompanySeed.GetCompanySeed();
 
         _companyRepository.GetAsync(guid).ReturnsAsync(company);
 
@@ -59,7 +58,7 @@ public sealed class CompanyServiceTest
     public async Task GetCompanyAsync_ShouldReturnNull_WhenCompanyDoesNotExist()
     {
         //  Arrange
-        _companyRepository.GetAsync(Arg<Guid>.Any()).Returns(null);
+        _companyRepository.GetAsync(Arg<Guid>.Any()).ReturnsAsync(null);
         
         //  Act
         var result = await _sut.GetCompanyAsync(Guid.NewGuid());

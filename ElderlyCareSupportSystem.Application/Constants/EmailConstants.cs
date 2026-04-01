@@ -1,4 +1,4 @@
-namespace ElderlyCareSupport.Extensions.Constants;
+namespace ElderlyCareSupportSystem.Application.Constants;
 
 public static class EmailConstants
 {

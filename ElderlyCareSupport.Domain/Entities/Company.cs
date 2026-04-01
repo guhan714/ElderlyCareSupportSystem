@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using ElderlyCareSupport.Domain.Entities.Identity;
 
 namespace ElderlyCareSupport.Domain.Entities;
 
@@ -19,8 +20,11 @@ public class Company
     public string City { get; set; }
     [MaxLength(200)]
     public string State { get; set; }
-    [MaxLength(200)]
-    public string Country { get; set; }
+    
+    public Guid CountryId { get; set; }
+    [ForeignKey(nameof(CountryId))]
+    public Country Country { get; set; }
+    
     [MaxLength(200)]
     public string ZipCode { get; set; }
     [MaxLength(200)]
@@ -33,11 +37,9 @@ public class Company
     public string RegistrationNumber { get; set; }
     
     public Guid CreatedById { get; set; }
-    [ForeignKey(nameof(CreatedById))]
-    public ApplicationUser CreatedBy { get; set; }
+    public User CreatedBy { get; set; }
     public DateTime CreatedOn { get; set; }
     public Guid UpdatedById { get; set; }
-    [ForeignKey(nameof(UpdatedById))]
-    public ApplicationUser UpdatedBy { get; set; }
+    public User UpdatedBy { get; set; }
     public DateTime UpdatedOn { get; set; }
 }

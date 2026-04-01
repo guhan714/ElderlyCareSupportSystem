@@ -1,6 +1,6 @@
 namespace ElderlyCareSupportSystem.Tests.TestUtility;
 
-public class TestConstants
+public static class TestConstants
 {
-    
+    public static readonly Guid CompanyId = Guid.NewGuid();
 }

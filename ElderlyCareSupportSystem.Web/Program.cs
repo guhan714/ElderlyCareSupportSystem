@@ -10,39 +10,51 @@ public static class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
-              
-        
-        // Add services to the container.
-        
-        builder.Services.AddControllersWithViews();
-        
-        
-        builder.Services.AddRouting(options =>
         {
-            options.LowercaseUrls = true;
-        });  
-        builder.Services
-            .AddApplication()
-            .AddInfrastructure(builder.Configuration);
-        
+
+            // Add services to the container.
+
+            builder.Services.AddControllersWithViews(options => { options.Filters.Add<GlobalExceptionFilter>(); });
+
+
+            builder.Services.AddRouting(options => { options.LowercaseUrls = true; });
+            builder.Services
+                .AddApplication()
+                .AddInfrastructure(builder.Configuration);
+            
+            builder.Services.AddAuthentication("ElderlyCareSupportCookie")
+                .AddCookie("ElderlyCareSupportCookie", options =>
+                {
+                    options.LoginPath = "/Auth/Login";
+                    options.Cookie.HttpOnly = true;
+                    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+                    options.SlidingExpiration = true;
+                });
+            builder.Services.AddAuthorization();
+            builder.Services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+                options.Cookie.HttpOnly = true;
+            });
+            builder.Services.AddRazorPages();
+        }
+
         var app = builder.Build();
+        {
+            app.UseHttpsRedirection();
+            app.UseRouting();
 
-        app.UseHttpsRedirection();
-        app.UseRouting();
-        
-        app.UseMiddleware<GlobalExceptionMiddleware>();
-        
-        app.UseAuthentication();
-        app.UseAuthorization();
+            app.UseAuthentication();
+            app.UseAuthorization();
 
-        app.MapStaticAssets();
-        app.MapControllerRoute(
-                name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}")
-            .WithStaticAssets();
-        app.MapRazorPages()
-            .WithStaticAssets();
-
+            app.MapStaticAssets();
+            app.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Auth}/{action=Login}/{id?}")
+                .WithStaticAssets();
+            app.MapRazorPages()
+                .WithStaticAssets();
+        }
         await app.RunAsync();
     }
 }

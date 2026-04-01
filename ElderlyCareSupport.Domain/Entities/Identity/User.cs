@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ElderlyCareSupport.Domain.Entities;
+namespace ElderlyCareSupport.Domain.Entities.Identity;
 
 public  class User
 {
@@ -13,9 +13,9 @@ public  class User
     public string Email { get; set; }
     public string PasswordHash { get; set; }
     
-    public Guid? CompanyId { get; set; }
-    [ForeignKey(nameof(CompanyId))]
-    public Company Company { get; set; }
+    public Guid? RoleId { get; set; }
+    [ForeignKey(nameof(RoleId))]
+    public Role Role { get; set; }
     
     public Guid CreatedUserId { get; set; }
     public DateTime CreatedOn { get; set; }

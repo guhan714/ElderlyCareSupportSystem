@@ -1,2 +1,62 @@
-@model TModel
+@using Org.BouncyCastle.Asn1.Ocsp
+<aside class="fixed left-0 top-0 h-screen w-72 bg-[#0B1120] border-r border-gray-800 flex flex-col">
 
+  <!-- Logo -->
+  <div class="h-16 flex items-center px-6 border-b border-gray-800">
+    <h1 class="text-white font-semibold text-lg">Elderly Care Support</h1>
+  </div>
+
+  <!-- Menu -->
+  <nav class="flex-1 overflow-y-auto px-4 py-6">
+
+    <!-- Settings Section -->
+    <ul class="space-y-2">
+
+      <!-- Settings Dropdown -->
+      <li>
+        <button onclick="toggleDropdown()" 
+          class="w-full flex items-center justify-between px-4 py-2 text-gray-300 hover:bg-gray-800 rounded-lg">
+
+          <span class="flex items-center gap-3">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor">
+              <path d="M12 6v6l4 2"/>
+            </svg>
+            Settings
+          </span>
+
+          <span id="arrow">⌄</span>
+        </button>
+
+        <!-- Dropdown -->
+        <ul id="dropdown" class="ml-8 mt-2 space-y-1 hidden">
+        
+          @if (User.IsInRole("Admin") && User.Identity.IsAuthenticated)
+          {
+            <li>
+              <a href="@Url.Action("Index", "Role")"
+                 onclick="setActive(this)"
+                 class="block px-3 py-2 rounded-lg text-sm text-gray-400 hover:text-white">
+                Roles
+              </a>
+            </li>
+          }
+          <li>
+            <a href="#"
+               onclick="setActive(this)"
+               class="block px-3 py-2 rounded-lg text-sm text-gray-400 hover:text-white">
+              Permissions
+            </a>
+          </li>
+
+        </ul>
+      </li>
+
+    </ul>
+
+  </nav>
+
+</aside>
+
+<script>
+  
+</script>

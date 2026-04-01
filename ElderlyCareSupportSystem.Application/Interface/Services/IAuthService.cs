@@ -7,5 +7,5 @@ namespace ElderlyCareSupportSystem.Application.Interface.Services;
 
 public interface IAuthService
 {
-    Task<Result<UserDto>> LoginAsync(LoginViewModel user);
+    Task<Result<UserViewModel>> LoginAsync(LoginViewModel user);
 }
