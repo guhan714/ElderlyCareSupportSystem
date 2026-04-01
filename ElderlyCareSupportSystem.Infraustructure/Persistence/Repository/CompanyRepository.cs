@@ -33,8 +33,8 @@ public sealed class CompanyRepository : ICompanyRepository
     {
         using var connection = _dapperDbContext.CreateConnection();
         return await connection.QueryFirstOrDefaultAsync<Company>("""
-                                                            SELECT * FROM "Companies" WHERE ID = @Id, new { Id = companyId });
-                                                            """);
+                                                            SELECT * FROM "Companies" WHERE ID = @Id);
+                                                            """, new { Id = companyId });
     }
 
     public async Task<Company> DeleteAsync(Company company)

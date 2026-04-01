@@ -1,4 +1,3 @@
-using ElderlyCareSupport.Domain.Entities;
 using ElderlyCareSupport.Domain.Entities.Identity;
 using ElderlyCareSupportSystem.Application.Models.DTO;
 using ElderlyCareSupportSystem.Application.Models.Reponse;

@@ -1,4 +1,3 @@
-using ElderlyCareSupport.Domain.Entities.Identity;
 using ElderlyCareSupportSystem.Application.Interface.Services;
 using ElderlyCareSupportSystem.Application.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;

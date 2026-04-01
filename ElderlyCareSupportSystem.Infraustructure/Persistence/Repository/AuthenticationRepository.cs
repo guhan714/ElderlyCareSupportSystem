@@ -1,10 +1,7 @@
 using Dapper;
-using ElderlyCareSupport.Domain.Entities;
-using ElderlyCareSupport.Domain.Entities.Identity;
 using ElderlyCareSupportSystem.Application.Interface.Repository;
 using ElderlyCareSupportSystem.Application.Models.DTO;
 using ElderlyCareSupportSystem.Infrastructure.Persistence.Data;
-using Microsoft.EntityFrameworkCore;
 
 namespace ElderlyCareSupportSystem.Infrastructure.Persistence.Repository;
 

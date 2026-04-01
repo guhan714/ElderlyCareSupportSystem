@@ -1,4 +1,3 @@
-using ElderlyCareSupport.Domain.Entities;
 using ElderlyCareSupport.Domain.Entities.Identity;
 using ElderlyCareSupportSystem.Application.Interface.Repository;
 using ElderlyCareSupportSystem.Application.Interface.Security;
