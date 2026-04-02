@@ -21,7 +21,7 @@ public class CompanyRepositoryBenchmarks : GlobalSetup
     [Benchmark(Baseline = true)]
     public async Task<Company?> GetAsync_Dapper()
     {
-        var connection = new DapperDbContext(_connectionString);
+        var connection = new DapperDbContext(ConnectionString);
         var db = connection.CreateConnection();
         return await db.QueryFirstOrDefaultAsync<Company>("""SELECT * FROM "Companies" WHERE "Id" = @Id;""",  new { Id = Id });
     }

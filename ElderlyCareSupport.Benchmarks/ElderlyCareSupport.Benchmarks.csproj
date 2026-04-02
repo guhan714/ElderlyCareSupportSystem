@@ -9,10 +9,13 @@
 
     <ItemGroup>
       <PackageReference Include="BenchmarkDotNet" Version="0.15.8" />
+      <PackageReference Include="dotenv.net" Version="4.0.1" />
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\ElderlyCareSupportSystem.Infraustructure\ElderlyCareSupportSystem.Infraustructure.csproj" />
     </ItemGroup>
-
+    <ItemGroup>
+        <None Include=".env" CopyToOutputDirectory="Always" />
+    </ItemGroup>
 </Project>
