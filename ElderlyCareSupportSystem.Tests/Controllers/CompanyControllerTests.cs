@@ -1,6 +1,6 @@
 using ElderlyCareSupport.Domain.Entities;
 using ElderlyCareSupportSystem.Application.Interface.Services;
-using ElderlyCareSupportSystem.Application.Models.Reponse;
+using ElderlyCareSupportSystem.Application.Models.Response;
 using ElderlyCareSupportSystem.Application.Models.ViewModels;
 using ElderlyCareSupportSystem.Web.Controllers;
 using FluentValidation;

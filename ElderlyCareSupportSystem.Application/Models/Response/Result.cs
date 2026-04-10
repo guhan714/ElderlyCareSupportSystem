@@ -1,4 +1,4 @@
-﻿namespace ElderlyCareSupportSystem.Application.Models.Reponse;
+﻿namespace ElderlyCareSupportSystem.Application.Models.Response;
 
 public class Result
 {

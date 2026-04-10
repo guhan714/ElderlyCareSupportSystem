@@ -1,7 +1,7 @@
 using ElderlyCareSupport.Domain.Entities;
 using ElderlyCareSupportSystem.Application.Interface.Repository;
 using ElderlyCareSupportSystem.Application.Interface.Services;
-using ElderlyCareSupportSystem.Application.Models.Reponse;
+using ElderlyCareSupportSystem.Application.Models.Response;
 
 namespace ElderlyCareSupportSystem.Application.Implementation.Master;
 
