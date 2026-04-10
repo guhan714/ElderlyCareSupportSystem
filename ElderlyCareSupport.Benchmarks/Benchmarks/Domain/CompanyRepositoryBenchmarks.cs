@@ -1,24 +1,21 @@
 using BenchmarkDotNet.Attributes;
 using Dapper;
-using dotenv.net;
 using ElderlyCareSupport.Benchmarks.Setup;
 using ElderlyCareSupport.Domain.Entities;
 using ElderlyCareSupportSystem.Infrastructure.Persistence.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace ElderlyCareSupport.Benchmarks.Benchmarks;
+namespace ElderlyCareSupport.Benchmarks.Benchmarks.Domain;
 
+[MemoryDiagnoser]
 public class CompanyRepositoryBenchmarks : GlobalSetup
 {
-    private Guid Id { get; init; } = Guid.Parse("6b847bc5-5829-4a77-a839-c8d8bb9cc33e");
+    private Guid Id { get; } = Guid.Parse("6b847bc5-5829-4a77-a839-c8d8bb9cc33e");
 
 
     [GlobalSetup]
     public void Setup()
     {
-        DotEnv.Load(options: new DotEnvOptions(probeForEnv: true));
-        ConnectionString = Environment.GetEnvironmentVariable("ConnectionString") ??
-                           throw new InvalidOperationException("Connection string not found");
         contextOptions = GetDbContextOptions();
     }
 

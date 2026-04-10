@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElderlyCareSupportSystem.We
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElderlyCareSupportSystem.Application", "ElderlyCareSupportSystem.Application\ElderlyCareSupportSystem.Application.csproj", "{2E7CDC00-5FA0-4F7A-B430-DCC42A86584A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElderlyCareSupportSystem.Infraustructure", "ElderlyCareSupportSystem.Infraustructure\ElderlyCareSupportSystem.Infraustructure.csproj", "{B8165E4E-5950-4BAD-97B5-1F635879DDC5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElderlyCareSupportSystem.Infrastructure", "ElderlyCareSupportSystem.Infrastructure\ElderlyCareSupportSystem.Infrastructure.csproj", "{B8165E4E-5950-4BAD-97B5-1F635879DDC5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{95567BEB-9459-40B9-B993-2BEDA4AAF46E}"
 EndProject

@@ -1,12 +1,11 @@
 using BenchmarkDotNet.Attributes;
 using Dapper;
-using dotenv.net;
 using ElderlyCareSupport.Benchmarks.Setup;
 using ElderlyCareSupportSystem.Application.Models.DTO;
 using ElderlyCareSupportSystem.Infrastructure.Persistence.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace ElderlyCareSupport.Benchmarks.Benchmarks;
+namespace ElderlyCareSupport.Benchmarks.Benchmarks.Domain;
 
 [MemoryDiagnoser]
 [RankColumn]
@@ -17,8 +16,6 @@ public class AuthenticationRepositoryBenchmark : GlobalSetup
     [GlobalSetup]
     public void Setup()
     {
-        DotEnv.Load(options: new DotEnvOptions(probeForEnv: true));
-        ConnectionString = Environment.GetEnvironmentVariable("ConnectionString") ?? throw new InvalidOperationException("Connection string not found");
         contextOptions = GetDbContextOptions();
     }
 
@@ -37,13 +34,16 @@ public class AuthenticationRepositoryBenchmark : GlobalSetup
 
     private readonly Func<ElderlyCareSupportDbContext, string, Task<UserDto?>> _getUserAsync =
         EF.CompileAsyncQuery((ElderlyCareSupportDbContext db, string userName) =>
-            db.Users.AsNoTracking().Select(u => new UserDto()
-            {
-                UserName = u.Username,
-                Email = u.Email,
-                PasswordHash = u.PasswordHash,
-                Role = u.Role.Name
-            }).FirstOrDefault(a => a.UserName == userName));
+            db.Users
+                .AsNoTracking()
+                .Where(a => a.Username == userName)
+                .Select(u => new UserDto()
+                {
+                    UserName = u.Username,
+                    Email = u.Email,
+                    PasswordHash = u.PasswordHash,
+                    Role = u.Role.Name
+                }).FirstOrDefault());
 
     [Benchmark]
     public async Task<UserDto?> GetUser_EFCore()
