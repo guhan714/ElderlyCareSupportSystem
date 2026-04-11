@@ -1,7 +1,14 @@
 ﻿using ElderlyCareSupportSystem.Application.Implementation.Master;
-using ElderlyCareSupportSystem.Application.Implementation.Services;
-using ElderlyCareSupportSystem.Application.Interface.Services;
 using ElderlyCareSupportSystem.Application.Mappers.Domain.DomainMapper;
+using ElderlyCareSupportSystem.Application.Modules.Authentication.Contracts;
+using ElderlyCareSupportSystem.Application.Modules.Authentication.Implementation;
+using ElderlyCareSupportSystem.Application.Modules.Company.Contracts;
+using ElderlyCareSupportSystem.Application.Modules.Company.Implementation;
+using ElderlyCareSupportSystem.Application.Modules.Country.Contracts;
+using ElderlyCareSupportSystem.Application.Modules.Role.Contracts;
+using ElderlyCareSupportSystem.Application.Modules.Role.Implementation;
+using ElderlyCareSupportSystem.Application.Modules.User.Contracts;
+using ElderlyCareSupportSystem.Application.Modules.User.Implementation;
 using ElderlyCareSupportSystem.Application.Validations;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;

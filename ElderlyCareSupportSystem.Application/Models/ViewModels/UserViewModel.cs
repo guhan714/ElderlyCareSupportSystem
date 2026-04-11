@@ -1,6 +1,6 @@
 namespace ElderlyCareSupportSystem.Application.Models.ViewModels;
 
-public class UserViewModel
+public sealed record UserViewModel
 {
     public string UserName { get; set; }
     public string Email { get; set; }

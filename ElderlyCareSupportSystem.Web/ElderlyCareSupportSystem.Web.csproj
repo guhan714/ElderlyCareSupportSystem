@@ -65,6 +65,13 @@
     <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\js\bootstrap.min.js" />
     <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\js\bootstrap.min.js.map" />
     <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\LICENSE" />
+    <_ContentIncludedByDefault Remove="Views\Role\Create.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Role\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="Modules\Role\Create.cshtml" />
+    <AdditionalFiles Include="Modules\Role\Index.cshtml" />
   </ItemGroup>
 
 </Project>

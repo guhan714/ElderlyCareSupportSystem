@@ -1,6 +1,12 @@
-using ElderlyCareSupportSystem.Application.Interface.Repository;
-using ElderlyCareSupportSystem.Application.Interface.Security;
-using ElderlyCareSupportSystem.Infrastructure.Externals;
+using ElderlyCareSupportSystem.Application.Modules.Authentication.Contracts;
+using ElderlyCareSupportSystem.Application.Modules.Company.Contracts;
+using ElderlyCareSupportSystem.Application.Modules.Country.Contracts;
+using ElderlyCareSupportSystem.Application.Modules.Role.Contracts;
+using ElderlyCareSupportSystem.Application.Modules.Security.Contracts;
+using ElderlyCareSupportSystem.Application.Modules.User.Contracts;
+using ElderlyCareSupportSystem.Infrastructure.Modules.Authentication;
+using ElderlyCareSupportSystem.Infrastructure.Modules.Services.Contracts;
+using ElderlyCareSupportSystem.Infrastructure.Modules.Services.Implementation;
 using ElderlyCareSupportSystem.Infrastructure.Persistence.Repository;
 using ElderlyCareSupportSystem.Infrastructure.Persistence.Data;
 using ElderlyCareSupportSystem.Infrastructure.Security.Implementation;

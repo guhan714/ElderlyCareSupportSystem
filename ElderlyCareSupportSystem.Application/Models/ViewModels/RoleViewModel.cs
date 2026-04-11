@@ -1,6 +1,6 @@
 namespace ElderlyCareSupportSystem.Application.Models.ViewModels;
 
-public sealed class RoleViewModel
+public sealed record RoleViewModel
 {
     public string Code {get;set;}
     public string Name {get;set;}

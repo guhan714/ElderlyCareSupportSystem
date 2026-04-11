@@ -1,4 +1,4 @@
-using ElderlyCareSupportSystem.Application.Interface.Security;
+using ElderlyCareSupportSystem.Application.Modules.Security.Contracts;
 using ElderlyCareSupportSystem.Infrastructure.Security.Implementation;
 using Shouldly;
 

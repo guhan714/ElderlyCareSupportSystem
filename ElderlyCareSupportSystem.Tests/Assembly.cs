@@ -1,9 +1,10 @@
-using ElderlyCareSupportSystem.Application.Interface.Repository;
-using ElderlyCareSupportSystem.Application.Interface.Security;
-using ElderlyCareSupportSystem.Application.Interface.Services;
 using ElderlyCareSupportSystem.Application.Mappers.DataTransfer;
 using ElderlyCareSupportSystem.Application.Mappers.Domain.DomainMapper;
 using ElderlyCareSupportSystem.Application.Models.ViewModels;
+using ElderlyCareSupportSystem.Application.Modules.Company.Contracts;
+using ElderlyCareSupportSystem.Application.Modules.Country.Contracts;
+using ElderlyCareSupportSystem.Application.Modules.Security.Contracts;
+using ElderlyCareSupportSystem.Application.Modules.User.Contracts;
 using FluentValidation;
 using Imposter.Abstractions;
 

@@ -1,6 +1,6 @@
 ﻿namespace ElderlyCareSupportSystem.Application.Models.ViewModels;
 
-public class CompanyViewModel
+public sealed record CompanyViewModel
 {
     public Guid Id { get; set; }
     public string Name { get; set; }
