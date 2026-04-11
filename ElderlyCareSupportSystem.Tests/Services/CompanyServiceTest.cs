@@ -1,9 +1,9 @@
-﻿using ElderlyCareSupportSystem.Application.Implementation.Services;
-using ElderlyCareSupportSystem.Application.Interface.Repository;
-using ElderlyCareSupportSystem.Application.Interface.Services;
-using ElderlyCareSupportSystem.Application.Mappers.DataTransfer;
+﻿using ElderlyCareSupportSystem.Application.Mappers.DataTransfer;
 using ElderlyCareSupportSystem.Application.Mappers.Domain.DomainMapper;
 using ElderlyCareSupportSystem.Application.Models.ViewModels;
+using ElderlyCareSupportSystem.Application.Modules.Company.Contracts;
+using ElderlyCareSupportSystem.Application.Modules.Company.Implementation;
+using ElderlyCareSupportSystem.Application.Modules.User.Contracts;
 using ElderlyCareSupportSystem.Tests.Seed.Domain;
 using ElderlyCareSupportSystem.Tests.Seed.DTO;
 using ElderlyCareSupportSystem.Tests.TestUtility;

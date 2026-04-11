@@ -1,5 +1,5 @@
-using ElderlyCareSupportSystem.Application.Interface.Services;
 using ElderlyCareSupportSystem.Application.Models.ViewModels;
+using ElderlyCareSupportSystem.Application.Modules.Company.Contracts;
 using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

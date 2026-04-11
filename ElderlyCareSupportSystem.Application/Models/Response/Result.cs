@@ -1,6 +1,6 @@
 ﻿namespace ElderlyCareSupportSystem.Application.Models.Response;
 
-public class Result
+public record Result
 {
     public bool IsSuccess { get; set; }
     public string Message { get; set; }
@@ -22,9 +22,9 @@ public class Result
     }
 }
 
-public class Result<T>(T data, bool isSuccess, string message = "") : Result(isSuccess, message)
+public record Result<T>(T Data, bool IsSuccess, string Message = "") : Result(IsSuccess, Message)
 {
-    public T Data { get; set; } = data;
+    public T Data { get; set; } = Data;
 
     public static Result<T> Success(T data)
     {

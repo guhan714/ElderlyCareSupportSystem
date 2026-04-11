@@ -14,7 +14,15 @@ public static class Program
 
             // Add services to the container.
 
-            builder.Services.AddControllersWithViews(options => { options.Filters.Add<GlobalExceptionFilter>(); });
+            builder.Services.AddControllersWithViews(options =>
+                {
+                    options.Filters.Add<GlobalExceptionFilter>();
+                })
+                .AddRazorOptions(options =>
+                {
+                    options.ViewLocationFormats.Add("/Modules/{1}/Views/{0}.cshtml");
+                    options.ViewLocationFormats.Add("/Modules/{1}/Views/Shared/{0}.cshtml");
+                });
 
 
             builder.Services.AddRouting(options => { options.LowercaseUrls = true; });
@@ -50,7 +58,7 @@ public static class Program
             app.MapStaticAssets();
             app.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Auth}/{action=Login}/{id?}")
+                    pattern: "{controller=Authentication}/{action=Login}/{id?}")
                 .WithStaticAssets();
             app.MapRazorPages()
                 .WithStaticAssets();

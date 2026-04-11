@@ -13,7 +13,7 @@ public class CollectionSearchBenchmarks
     public int Count { get; set; }
 
     [Params("500", "2500", "5000")]
-    public string target;
+    public string Target { get; set; }
 
     [GlobalSetup]
     public void GlobalSetup()
@@ -26,13 +26,13 @@ public class CollectionSearchBenchmarks
     [Benchmark(Baseline = true)]
     public string? ListFirstOrDefault()
     {
-        return ListOfString.FirstOrDefault(a => a == target);
+        return ListOfString.FirstOrDefault(a => a == Target);
     }
     
     [Benchmark]
     public string? HashSetGetTryGetValue()
     {
-        var exists = HashSetString.TryGetValue(target, out string? value);
+        var exists = HashSetString.TryGetValue(Target, out string? value);
         return exists ? value : null;
     }
 }

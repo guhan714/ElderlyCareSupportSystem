@@ -6,6 +6,6 @@ using ElderlyCareSupport.Benchmarks.Benchmarks.Technical;
 
 var config = ManualConfig
         .Create(DefaultConfig.Instance)
-        .WithSummaryStyle(new SummaryStyle(null, true, null, null, ratioStyle: RatioStyle.Trend))
+        .WithSummaryStyle(new SummaryStyle(null, false, null, null, ratioStyle: RatioStyle.Trend))
     ;
-BenchmarkRunner.Run<CollectionSearchBenchmarks>(config);
+BenchmarkRunner.Run<StringMemoryBenchmarks>(config);
