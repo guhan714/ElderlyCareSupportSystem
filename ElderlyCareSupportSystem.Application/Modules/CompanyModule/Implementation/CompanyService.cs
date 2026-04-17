@@ -4,6 +4,7 @@ using ElderlyCareSupportSystem.Application.Models.Response;
 using ElderlyCareSupportSystem.Application.Models.ViewModels;
 using ElderlyCareSupportSystem.Application.Modules.Common.Contracts;
 using ElderlyCareSupportSystem.Application.Modules.Company.Contracts;
+using ElderlyCareSupportSystem.Application.Modules.CompanyModule.Contracts;
 using ElderlyCareSupportSystem.Application.Modules.Security.Contracts;
 using ElderlyCareSupportSystem.Application.Modules.User.Contracts;
 using ElderlyCareSupportSystem.Application.Modules.Users.Mapper;
@@ -31,6 +32,7 @@ public sealed class CompanyService : ICompanyService
 
     public async Task<Result> CreateCompanyAsync(CompanyViewModel company)
     {
+        await _unitOfWork.BeginTransactionAsync();
         try
         {
             var companyEntity = _domainMapper.ToCompany(company);
@@ -48,6 +50,7 @@ public sealed class CompanyService : ICompanyService
             var userEntity = UserMapper.ToUser(user);
             
             await _unitOfWork.Users.AddAsync(userEntity);
+            await _unitOfWork.SaveChangesAsync();
             await _unitOfWork.CommitAsync();
 
             return Result.Success("Company created successfully");

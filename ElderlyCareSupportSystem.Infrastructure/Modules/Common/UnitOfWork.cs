@@ -1,5 +1,6 @@
 using ElderlyCareSupportSystem.Application.Modules.Common.Contracts;
 using ElderlyCareSupportSystem.Application.Modules.Company.Contracts;
+using ElderlyCareSupportSystem.Application.Modules.CompanyModule.Contracts;
 using ElderlyCareSupportSystem.Application.Modules.Country.Contracts;
 using ElderlyCareSupportSystem.Application.Modules.User.Contracts;
 using ElderlyCareSupportSystem.Infrastructure.Modules.Company;
@@ -8,7 +9,7 @@ using ElderlyCareSupportSystem.Infrastructure.Modules.User;
 using ElderlyCareSupportSystem.Infrastructure.Persistence.Data;
 using Microsoft.EntityFrameworkCore.Storage;
 
-namespace ElderlyCareSupportSystem.Infrastructure.Modules.Common.Implementation;
+namespace ElderlyCareSupportSystem.Infrastructure.Modules.Common;
 
 public sealed class UnitOfWork : IUnitOfWork
 {

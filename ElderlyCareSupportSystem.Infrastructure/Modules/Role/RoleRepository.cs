@@ -3,7 +3,7 @@ using ElderlyCareSupportSystem.Application.Models.ViewModels;
 using ElderlyCareSupportSystem.Application.Modules.Role.Contracts;
 using ElderlyCareSupportSystem.Infrastructure.Persistence.Data;
 
-namespace ElderlyCareSupportSystem.Infrastructure.Persistence.Repository;
+namespace ElderlyCareSupportSystem.Infrastructure.Modules.Role;
 
 public sealed class RoleRepository : IRoleRepository
 {

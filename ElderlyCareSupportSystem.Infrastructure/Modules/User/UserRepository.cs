@@ -1,10 +1,9 @@
 using Dapper;
-using ElderlyCareSupport.Domain.Entities.Identity;
 using ElderlyCareSupportSystem.Application.Models.ViewModels;
 using ElderlyCareSupportSystem.Application.Modules.User.Contracts;
 using ElderlyCareSupportSystem.Infrastructure.Persistence.Data;
 
-namespace ElderlyCareSupportSystem.Infrastructure.Persistence.Repository;
+namespace ElderlyCareSupportSystem.Infrastructure.Modules.User;
 
 public sealed class UserRepository : IUserRepository
 {
@@ -17,21 +16,20 @@ public sealed class UserRepository : IUserRepository
         _dapperDbContext = dapperDbContext;
     }
 
-    public async Task<User?> AddAsync(User user)
+    public async Task<ElderlyCareSupport.Domain.Entities.Identity.User?> AddAsync(ElderlyCareSupport.Domain.Entities.Identity.User user)
     {
         await _elderlyCareSupportDbContext.Users.AddAsync(user);
-        await _elderlyCareSupportDbContext.SaveChangesAsync();
         return user;
     }
 
-    public async Task<User?> UpdateAsync(User user)
+    public async Task<ElderlyCareSupport.Domain.Entities.Identity.User?> UpdateAsync(ElderlyCareSupport.Domain.Entities.Identity.User user)
     {
         _elderlyCareSupportDbContext.Update(user);
         await _elderlyCareSupportDbContext.SaveChangesAsync();
         return user;
     }
 
-    public async Task<User?> DeleteAsync(Guid userId)
+    public async Task<ElderlyCareSupport.Domain.Entities.Identity.User?> DeleteAsync(Guid userId)
     {
         var user = await _elderlyCareSupportDbContext.Users.FindAsync(userId);
         _elderlyCareSupportDbContext.Users.Remove(user!);
@@ -39,12 +37,12 @@ public sealed class UserRepository : IUserRepository
         return user;
     }
 
-    public async Task<User?> FindAsync(Guid userId)
+    public async Task<ElderlyCareSupport.Domain.Entities.Identity.User?> FindAsync(Guid userId)
     {
         using var connection = _dapperDbContext.CreateConnection();
-        return await connection.QueryFirstOrDefaultAsync<User>("""
-                                                         SELECT * FROM "Users" WHERE ID = @Id;
-                                                         """, new { Id = userId });
+        return await connection.QueryFirstOrDefaultAsync<ElderlyCareSupport.Domain.Entities.Identity.User>("""
+            SELECT * FROM "Users" WHERE ID = @Id;
+            """, new { Id = userId });
     }
 
     public async Task<UserViewModel?> FindDetailsAsync(Guid userId)

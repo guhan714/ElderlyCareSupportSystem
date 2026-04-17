@@ -17,31 +17,9 @@ public interface ICompanyService
     /// </returns>
     Task<Result> CreateCompanyAsync(CompanyViewModel company);
     
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="company"></param>
-    /// <returns></returns>
     Task<Result> UpdateCompanyAsync(CompanyViewModel company);
     
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="companyId"></param>
-    /// <returns>
-    /// A <see cref="Result<CompanyViewModel>"/> indicating whether the operation succeeded.
-    /// Returns failure if user creation or company persistence fails.
-    /// </returns>
     Task<Result<CompanyViewModel>> GetCompanyAsync(Guid companyId);
     
-    
-    /// <summary>
-    /// Deletes the company with the specific Id.
-    /// </summary>
-    /// <param name="company">Company's unique identity</param>
-    /// <returns>
-    /// A <see cref="Result"/> indicating whether the operation succeeded.
-    /// Returns failure if user creation or company persistence fails.
-    /// </returns>
     Task<Result> DeleteCompanyAsync(Guid company);
 }

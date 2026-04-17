@@ -1,6 +1,6 @@
 using ElderlyCareSupportSystem.Application.Modules.Security.Contracts;
 
-namespace ElderlyCareSupportSystem.Infrastructure.Security.Implementation;
+namespace ElderlyCareSupportSystem.Infrastructure.Modules.Security;
 
 public sealed class BCryptHashingService : IHashingService
 {

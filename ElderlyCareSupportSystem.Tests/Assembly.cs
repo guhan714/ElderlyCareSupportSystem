@@ -1,12 +1,16 @@
 using ElderlyCareSupportSystem.Application.Mappers.DataTransfer;
 using ElderlyCareSupportSystem.Application.Mappers.Domain.DomainMapper;
 using ElderlyCareSupportSystem.Application.Models.ViewModels;
+using ElderlyCareSupportSystem.Application.Modules.Common.Contracts;
 using ElderlyCareSupportSystem.Application.Modules.Company.Contracts;
+using ElderlyCareSupportSystem.Application.Modules.CompanyModule.Contracts;
 using ElderlyCareSupportSystem.Application.Modules.Country.Contracts;
 using ElderlyCareSupportSystem.Application.Modules.Security.Contracts;
 using ElderlyCareSupportSystem.Application.Modules.User.Contracts;
 using FluentValidation;
 using Imposter.Abstractions;
+
+[assembly: GenerateImposter(typeof(IUnitOfWork))]
 
 [assembly: GenerateImposter(typeof(ICompanyRepository))]
 [assembly: GenerateImposter(typeof(DomainMapper))]

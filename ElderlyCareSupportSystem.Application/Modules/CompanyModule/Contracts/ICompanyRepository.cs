@@ -1,9 +1,10 @@
-﻿namespace ElderlyCareSupportSystem.Application.Modules.Company.Contracts;
+﻿namespace ElderlyCareSupportSystem.Application.Modules.CompanyModule.Contracts;
+using ElderlyCareSupport.Domain.Entities;
 
 public interface ICompanyRepository
 {
-    Task<ElderlyCareSupport.Domain.Entities.Company> AddAsync(ElderlyCareSupport.Domain.Entities.Company company);
-    Task<ElderlyCareSupport.Domain.Entities.Company?> UpdateAsync(ElderlyCareSupport.Domain.Entities.Company company);
-    Task<ElderlyCareSupport.Domain.Entities.Company?> GetAsync(Guid companyId);
-    Task<ElderlyCareSupport.Domain.Entities.Company> DeleteAsync(ElderlyCareSupport.Domain.Entities.Company company);
+    Task<Company> AddAsync(Company company);
+    Task<Company?> UpdateAsync(Company company);
+    Task<Company?> GetAsync(Guid companyId);
+    Task<Company> DeleteAsync(Company company);
 }
