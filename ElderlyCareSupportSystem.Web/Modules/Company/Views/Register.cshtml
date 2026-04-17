@@ -13,103 +13,135 @@
     <link rel="stylesheet" href="~/lib/select/style/tom-select.css"/>
 </head>
 <body>
-<div class="container mx-auto">
-    <div class="card shadow-lg">
-        <div class="card-header bg-primary text-white">
-            <h4>Company Registration</h4>
+
+<div class="max-w-5xl mx-auto p-6">
+    <div class="bg-slate-900/80 backdrop-blur-xl border border-slate-700 rounded-2xl shadow-2xl">
+        
+        <!-- Header -->
+        <div class="px-6 py-4 border-b border-slate-700">
+            <h4 class="text-xl font-semibold text-white">Company Registration</h4>
+            <p class="text-sm text-slate-400 mt-1">Create your company and admin account</p>
         </div>
 
-        <div class="card-body">
-
-            <form id="CompanyRegistration" asp-action="Register" method="post">
+        <!-- Body -->
+        <div class="p-6">
+            <form id="CompanyRegistration" asp-action="Register" method="post" class="space-y-6">
                 @Html.AntiForgeryToken()
-                <div class="grid bg-emerald-950">
 
-                    <div class="col-md-6">
-                        <label asp-for="Name" class="form-label"></label>
-                        <input asp-for="Name" class="form-control"/>
-                        <span asp-validation-for="Name" class="text-danger"></span>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+                    <!-- Name -->
+                    <div>
+                        <label for="Name" class="block text-sm text-slate-300">Company Name</label>
+                        <input id="Name" asp-for="Name" placeholder="Enter company name"
+                               class="mt-1 w-full bg-slate-800 border border-slate-700 text-white rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"/>
+                        <span asp-validation-for="Name" class="text-red-400 text-xs"></span>
                     </div>
 
-                    <div class="col-md-6">
-                        <label asp-for="RegistrationNumber" class="form-label"></label>
-                        <input asp-for="RegistrationNumber" class="form-control"/>
-                        <span asp-validation-for="RegistrationNumber" class="text-danger"></span>
+                    <!-- Registration Number -->
+                    <div>
+                        <label for="RegistrationNumber" class="block text-sm text-slate-300">Registration No</label>
+                        <input id="RegistrationNumber" asp-for="RegistrationNumber" placeholder="e.g. REG-12345"
+                               class="mt-1 w-full bg-slate-800 border border-slate-700 text-white rounded-lg px-3 py-2"/>
+                        <span asp-validation-for="RegistrationNumber" class="text-red-400 text-xs"></span>
                     </div>
 
-                    <div class="col-md-12">
-                        <label asp-for="AddressLine1" class="form-label"></label>
-                        <input asp-for="AddressLine1" class="form-control"/>
+                    <!-- Address -->
+                    <div class="md:col-span-2">
+                        <label for="AddressLine1" class="text-sm text-slate-300">Address Line 1</label>
+                        <input id="AddressLine1" asp-for="AddressLine1" placeholder="Street, Area"
+                               class="mt-1 w-full bg-slate-800 border border-slate-700 text-white rounded-lg px-3 py-2"/>
                     </div>
 
-                    <div class="col-md-12">
-                        <label asp-for="AddressLine2" class="form-label"></label>
-                        <input asp-for="AddressLine2" class="form-control"/>
+                    <div class="md:col-span-2">
+                        <label for="AddressLine2" class="text-sm text-slate-300">Address Line 2</label>
+                        <input id="AddressLine2" asp-for="AddressLine2" placeholder="Optional"
+                               class="mt-1 w-full bg-slate-800 border border-slate-700 text-white rounded-lg px-3 py-2"/>
                     </div>
 
-                    <div class="col-md-12">
-                        <label asp-for="AddressLine3" class="form-label"></label>
-                        <input asp-for="AddressLine3" class="form-control"/>
+                    <div class="md:col-span-2">
+                        <label for="AddressLine3" class="text-sm text-slate-300">Address Line 3</label>
+                        <input id="AddressLine3" asp-for="AddressLine3" placeholder="Optional"
+                               class="mt-1 w-full bg-slate-800 border border-slate-700 text-white rounded-lg px-3 py-2"/>
                     </div>
 
-                    <div class="col-md-4">
-                        <label asp-for="City" class="form-label"></label>
-                        <input asp-for="City" class="form-control"/>
+                    <!-- Location -->
+                    <div>
+                        <label for="City" class="text-sm text-slate-300">City</label>
+                        <input id="City" asp-for="City" placeholder="City"
+                               class="mt-1 w-full bg-slate-800 border border-slate-700 text-white rounded-lg px-3 py-2"/>
                     </div>
 
-                    <div class="col-md-4">
-                        <label asp-for="State" class="form-label"></label>
-                        <input asp-for="State" class="form-control"/>
+                    <div>
+                        <label for="State" class="text-sm text-slate-300">State</label>
+                        <input id="State" asp-for="State" placeholder="State"
+                               class="mt-1 w-full bg-slate-800 border border-slate-700 text-white rounded-lg px-3 py-2"/>
                     </div>
 
-                    <div class="col-md-4">
-                        <label asp-for="ZipCode" class="form-label"></label>
-                        <input asp-for="ZipCode" class="form-control"/>
+                    <div>
+                        <label for="ZipCode" class="text-sm text-slate-300">Zip Code</label>
+                        <input id="ZipCode" asp-for="ZipCode" placeholder="600001"
+                               class="mt-1 w-full bg-slate-800 border border-slate-700 text-white rounded-lg px-3 py-2"/>
                     </div>
 
-                    <div class="col-md-6">
-                        <label asp-for="CountryId" class="form-label">Country</label>
-                        <select asp-for="CountryId" asp-items="@ViewBag.Countries" class="">
-                            <option value="">Select County</option>
+                    <div>
+                        <label for="CountryId" class="text-sm text-slate-300">Country</label>
+                        <select id="CountryId" asp-for="CountryId" asp-items="@ViewBag.Countries"
+                                class="">
+                            <option>Select Country</option>
+                            @foreach (var i in ViewBag.Countries)
+                            {
+                                <option value="@i.Value">@i.Text</option>
+                            }
                         </select>
                     </div>
 
-                    <div class="col-md-6">
-                        <label asp-for="PhoneNumber" class="form-label"></label>
-                        <input asp-for="PhoneNumber" class="form-control"/>
+                    <!-- Contact -->
+                    <div>
+                        <label for="PhoneNumber" class="text-sm text-slate-300">Phone</label>
+                        <input id="PhoneNumber" asp-for="PhoneNumber" placeholder="+91 9876543210"
+                               class="mt-1 w-full bg-slate-800 border border-slate-700 text-white rounded-lg px-3 py-2"/>
                     </div>
 
-                    <div class="col-md-6">
-                        <label asp-for="UserName" class="form-label">User</label>
-                        <input asp-for="UserName" class="form-control"/>
+                    <!-- User -->
+                    <div>
+                        <label for="UserName" class="text-sm text-slate-300">Username</label>
+                        <input id="UserName" asp-for="UserName" placeholder="admin"
+                               class="mt-1 w-full bg-slate-800 border border-slate-700 text-white rounded-lg px-3 py-2"/>
                     </div>
 
-                    <div class="col-md-6">
-                        <label asp-for="Password" class="form-label"></label>
-                        <input type="password" asp-for="Password" class="form-control"/>
-                    </div>
-                    <div class="col-md-6">
-                        <label asp-for="Email" class="form-label"></label>
-                        <input asp-for="Email" class="form-control"/>
+                    <div>
+                        <label for="Password" class="text-sm text-slate-300">Password</label>
+                        <input id="Password" type="password" asp-for="Password" placeholder="••••••••"
+                               class="mt-1 w-full bg-slate-800 border border-slate-700 text-white rounded-lg px-3 py-2"/>
                     </div>
 
-                    <div class="col-md-6">
-                        <label asp-for="Website" class="form-label"></label>
-                        <input asp-for="Website" class="form-control"/>
+                    <div>
+                        <label for="Email" class="text-sm text-slate-300">Email</label>
+                        <input id="Email" asp-for="Email" placeholder="admin@company.com"
+                               class="mt-1 w-full bg-slate-800 border border-slate-700 text-white rounded-lg px-3 py-2"/>
+                    </div>
+
+                    <div>
+                        <label for="Website" class="text-sm text-slate-300">Website</label>
+                        <input id="Website" asp-for="Website" placeholder="https://example.com"
+                               class="mt-1 w-full bg-slate-800 border border-slate-700 text-white rounded-lg px-3 py-2"/>
                     </div>
 
                 </div>
 
-                <hr class="mt-4"/>
-
-                <div class="text-end">
-                    <button id="RegisterCompany" type="button" class="btn btn-success btn-sm">
-                        Register
+                <!-- Footer -->
+                <div class="pt-4 border-t border-slate-700 flex justify-end">
+                    <button id="RegisterCompany" type="submit"
+                            class="px-6 py-2 rounded-lg text-white font-medium 
+                                   bg-gradient-to-r from-purple-600 to-indigo-600 
+                                   hover:from-purple-700 hover:to-indigo-700 
+                                   transition shadow-lg cursor-pointer">
+                        Register Company
                     </button>
                 </div>
 
             </form>
-
         </div>
     </div>
 </div>

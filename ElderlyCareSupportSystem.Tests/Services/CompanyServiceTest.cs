@@ -1,9 +1,13 @@
 ﻿using ElderlyCareSupportSystem.Application.Mappers.DataTransfer;
 using ElderlyCareSupportSystem.Application.Mappers.Domain.DomainMapper;
 using ElderlyCareSupportSystem.Application.Models.ViewModels;
+using ElderlyCareSupportSystem.Application.Modules.Common.Contracts;
 using ElderlyCareSupportSystem.Application.Modules.Company.Contracts;
 using ElderlyCareSupportSystem.Application.Modules.Company.Implementation;
+using ElderlyCareSupportSystem.Application.Modules.CompanyModule.Contracts;
+using ElderlyCareSupportSystem.Application.Modules.Security.Contracts;
 using ElderlyCareSupportSystem.Application.Modules.User.Contracts;
+using ElderlyCareSupportSystem.Infrastructure.Modules.Security;
 using ElderlyCareSupportSystem.Tests.Seed.Domain;
 using ElderlyCareSupportSystem.Tests.Seed.DTO;
 using ElderlyCareSupportSystem.Tests.TestUtility;
@@ -20,6 +24,8 @@ public sealed class CompanyServiceTest
     private readonly IUserServiceImposter _userService;
     private readonly DomainMapperImposter _domainMapperImposter;
     private readonly DtoMapperImposter _dtoMapperImposter;
+    private readonly IUnitOfWorkImposter _unitOfWork;
+    private readonly IHashingService _hashingService;
 
 
     public CompanyServiceTest()
@@ -28,7 +34,9 @@ public sealed class CompanyServiceTest
         _companyRepository = ICompanyRepository.Imposter();
         _domainMapperImposter = DomainMapper.Imposter();
         _dtoMapperImposter = DtoMapper.Imposter();
-        _sut = new CompanyService(_companyRepository.Instance(),  _domainMapperImposter.Instance(), _dtoMapperImposter.Instance(), _userService.Instance());
+        _unitOfWork = IUnitOfWork.Imposter();
+        _hashingService = new BCryptHashingService();
+        _sut = new CompanyService(_companyRepository.Instance(),  _domainMapperImposter.Instance(), _dtoMapperImposter.Instance(), _unitOfWork.Instance(), _hashingService);
     }
 
 

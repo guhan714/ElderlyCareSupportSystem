@@ -55,7 +55,7 @@ public static class Program
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.MapStaticAssets();
+            app.UseStaticFiles();
             app.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Authentication}/{action=Login}/{id?}")

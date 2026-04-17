@@ -1,5 +1,5 @@
 using ElderlyCareSupportSystem.Application.Modules.Security.Contracts;
-using ElderlyCareSupportSystem.Infrastructure.Security.Implementation;
+using ElderlyCareSupportSystem.Infrastructure.Modules.Security;
 using Shouldly;
 
 namespace ElderlyCareSupportSystem.Tests.Services;
