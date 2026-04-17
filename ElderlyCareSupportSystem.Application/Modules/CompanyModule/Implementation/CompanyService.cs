@@ -2,55 +2,61 @@
 using ElderlyCareSupportSystem.Application.Models.DTO;
 using ElderlyCareSupportSystem.Application.Models.Response;
 using ElderlyCareSupportSystem.Application.Models.ViewModels;
+using ElderlyCareSupportSystem.Application.Modules.Common.Contracts;
 using ElderlyCareSupportSystem.Application.Modules.Company.Contracts;
+using ElderlyCareSupportSystem.Application.Modules.Security.Contracts;
 using ElderlyCareSupportSystem.Application.Modules.User.Contracts;
+using ElderlyCareSupportSystem.Application.Modules.Users.Mapper;
 using DtoMapper = ElderlyCareSupportSystem.Application.Mappers.DataTransfer.DtoMapper;
 
 namespace ElderlyCareSupportSystem.Application.Modules.Company.Implementation;
 
 public sealed class CompanyService : ICompanyService
 {
+    private readonly IUnitOfWork _unitOfWork;
     private readonly ICompanyRepository _companyRepository;
-    private readonly IUserService _userService;
+    private readonly IHashingService _hashingService;
+    
     private readonly DomainMapper _domainMapper;
     private readonly DtoMapper _dtoMapper;
 
-    public CompanyService(ICompanyRepository companyRepository, DomainMapper domainMapper, DtoMapper dtoMapper, IUserService userService)
+    public CompanyService(ICompanyRepository companyRepository, DomainMapper domainMapper, DtoMapper dtoMapper, IUnitOfWork unitOfWork, IHashingService hashingService)
     {
         _companyRepository = companyRepository;
         _domainMapper = domainMapper;
         _dtoMapper = dtoMapper;
-        _userService = userService;
+        _unitOfWork = unitOfWork;
+        _hashingService = hashingService;
     }
 
     public async Task<Result> CreateCompanyAsync(CompanyViewModel company)
     {
-        var companyEntity = _domainMapper.ToCompany(company);
-        companyEntity.Id = Guid.NewGuid();
-
-        var user = new UserDto()
+        try
         {
-            UserId = Guid.NewGuid(),
-            UserName = company.UserName,
-            Email = company.Email,
-            PasswordHash = company.Password,
-            CompanyName = companyEntity.Name,
-            CreatedByUserId = Guid.Parse("2467ff03-1578-47dd-9330-a8dcf035882c"),
-            ModifiedByUserId = Guid.Parse("2467ff03-1578-47dd-9330-a8dcf035882c")
-        };
-        
-        companyEntity.CreatedById = user.CreatedByUserId;
-        companyEntity.CreatedOn = DateTime.UtcNow;
-        companyEntity.UpdatedById = user.CreatedByUserId;
-        companyEntity.UpdatedOn = DateTime.UtcNow;
-        
-        await _companyRepository.AddAsync(companyEntity);
-        
-        var userCreation = await _userService.AddUser(user);
-        if(!userCreation.IsSuccess)
-            return Result.Fail("Could not create user");
+            var companyEntity = _domainMapper.ToCompany(company);
+            companyEntity.Id = Guid.NewGuid();
 
-        return Result.Success("Company created successfully");
+            var user = MapUserDto(company, companyEntity);
+
+            companyEntity.CreatedById = user.CreatedByUserId;
+            companyEntity.CreatedOn = DateTime.UtcNow;
+            companyEntity.UpdatedById = user.CreatedByUserId;
+            companyEntity.UpdatedOn = DateTime.UtcNow;
+
+            await _unitOfWork.Companies.AddAsync(companyEntity);
+
+            var userEntity = UserMapper.ToUser(user);
+            
+            await _unitOfWork.Users.AddAsync(userEntity);
+            await _unitOfWork.CommitAsync();
+
+            return Result.Success("Company created successfully");
+        }
+        catch (Exception ex)
+        {
+            await _unitOfWork.RollbackAsync();
+            return Result.Fail(ex.Message);
+        }
     }
 
     public async Task<Result> UpdateCompanyAsync(CompanyViewModel company)
@@ -87,5 +93,22 @@ public sealed class CompanyService : ICompanyService
         var result = await _companyRepository.DeleteAsync(company);
 
         return Result.Success("Company deleted successfully");
+    }
+
+
+    private UserDto MapUserDto(CompanyViewModel companyViewModel, ElderlyCareSupport.Domain.Entities.Company company)
+    {
+        var user = new UserDto()
+        {
+            UserId = Guid.NewGuid(),
+            UserName = companyViewModel.UserName,
+            Email = company.Email,
+            PasswordHash = _hashingService.HashPassword(companyViewModel.Password),
+            CompanyName = company.Name,
+            CreatedByUserId = Guid.Parse("2467ff03-1578-47dd-9330-a8dcf035882c"),
+            ModifiedByUserId = Guid.Parse("2467ff03-1578-47dd-9330-a8dcf035882c")
+        };
+
+        return user;
     }
 }
