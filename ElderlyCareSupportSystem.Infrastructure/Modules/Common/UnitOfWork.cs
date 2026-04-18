@@ -61,7 +61,10 @@ public sealed class UnitOfWork : IUnitOfWork
 
     public async ValueTask DisposeAsync()
     {
-        _transaction?.Dispose();
-        await _dbContext.DisposeAsync();
+        if (_transaction != null)
+        {
+            await _transaction.DisposeAsync();
+            _transaction = null;
+        }
     }
 }
