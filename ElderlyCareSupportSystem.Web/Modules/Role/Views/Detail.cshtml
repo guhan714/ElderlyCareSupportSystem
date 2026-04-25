@@ -1,0 +1,98 @@
+@model ElderlyCareSupportSystem.Application.Modules.Role.Models.RoleViewModel
+
+@{
+    Layout = "_Layout";
+}
+
+<div class="bg-white rounded-2xl shadow-lg w-full overflow-hidden">
+
+    <!-- Header -->
+    <div class="bg-gradient-to-r from-violet-600 to-violet-800 px-8 py-6 flex items-center justify-between">
+        <div class="flex items-center gap-4">
+            <div class="w-11 h-11 bg-white/15 rounded-xl flex items-center justify-center text-2xl">🛡️</div>
+            <div>
+                <div class="text-white font-bold text-lg">Role Details</div>
+                <div class="text-violet-200 text-sm">View role information</div>
+            </div>
+        </div>
+
+        <span class="px-3 py-1 text-xs font-semibold rounded-full @(Model.IsActive ? "bg-green-100 text-green-700" : "bg-gray-200 text-gray-600")">
+            @(Model.IsActive ? "Active" : "Inactive")
+        </span>
+    </div>
+
+    <!-- Body -->
+    <div class="px-8 py-7 flex flex-col gap-6">
+
+        <!-- Code & Name -->
+        <div class="grid grid-cols-2 gap-6">
+            <div>
+                <div class="text-xs text-gray-400 uppercase mb-1">Code</div>
+                <div class="bg-gray-50 border border-gray-200 rounded-lg px-4 py-2.5 font-mono text-sm text-gray-800">
+                    @Model.Code
+                </div>
+            </div>
+
+            <div>
+                <div class="text-xs text-gray-400 uppercase mb-1">Name</div>
+                <div class="bg-gray-50 border border-gray-200 rounded-lg px-4 py-2.5 text-sm text-gray-800 font-semibold">
+                    @Model.Name
+                </div>
+            </div>
+        </div>
+
+        <!-- Description -->
+        <div>
+            <div class="text-xs text-gray-400 uppercase mb-1">Description</div>
+            <div class="bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-sm text-gray-700 leading-relaxed min-h-[80px]">
+                @(string.IsNullOrWhiteSpace(Model.Description) ? "No description provided" : Model.Description)
+            </div>
+        </div>
+
+        <!-- Meta Info -->
+        <div class="grid grid-cols-2 gap-6">
+            <div>
+                <div class="text-xs text-gray-400 uppercase mb-1">Created By</div>
+                <div class="bg-gray-50 border border-gray-200 rounded-lg px-4 py-2.5 text-sm text-gray-700">
+                    @Model.CreatedBy
+                </div>
+            </div>
+
+            <div>
+                <div class="text-xs text-gray-400 uppercase mb-1">Modified By</div>
+                <div class="bg-gray-50 border border-gray-200 rounded-lg px-4 py-2.5 text-sm text-gray-700">
+                    @Model.ModifiedBy
+                </div>
+            </div>
+        </div><div class="grid grid-cols-2 gap-6">
+            <div>
+                <div class="text-xs text-gray-400 uppercase mb-1">Created On</div>
+                <div class="bg-gray-50 border border-gray-200 rounded-lg px-4 py-2.5 text-sm text-gray-700">
+                    @Model.CreatedOn
+                </div>
+            </div>
+
+            <div>
+                <div class="text-xs text-gray-400 uppercase mb-1">Last Modified</div>
+                <div class="bg-gray-50 border border-gray-200 rounded-lg px-4 py-2.5 text-sm text-gray-700">
+                    @Model.ModifiedOn
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="flex justify-end gap-3 px-8 py-5 border-t border-gray-100">
+        <a href="@Url.Action("Edit", "Role", new{ roleId = @Model.Id})"
+           class="px-5 py-2.5 rounded-lg border border-gray-200 text-gray-600 text-sm font-semibold hover:border-violet-300 hover:text-violet-600 hover:bg-violet-50 transition">
+            Edit
+        </a>
+
+        <a href="@Url.Action("Index")"
+           class="px-5 py-2.5 rounded-lg bg-gradient-to-r from-violet-600 to-violet-800 text-white text-sm font-bold shadow-md hover:-translate-y-0.5 hover:shadow-violet-300 hover:shadow-lg transition">
+            Back
+        </a>
+    </div>
+
+</div>

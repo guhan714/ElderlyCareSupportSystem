@@ -31,6 +31,19 @@ public sealed class RoleRepository : IRoleRepository
         using var connection = _dapperDbContext.CreateConnection();
         return await connection.QueryFirstOrDefaultAsync<RoleDto>($"""SELECT "Id", "Code", "Name", "Description", "IsActive" FROM "Roles" WHERE "Id" = @Id; """,  new { Id = id });
     }
+    
+    public Task<RoleDto?> GetDetailsByIdAsync(Guid id)
+    {
+        var connection = _dapperDbContext.CreateConnection();
+        return connection.QueryFirstOrDefaultAsync<RoleDto>($"""
+                                                             SELECT r."Id", r."Code", r."Name", r."Description", r."IsActive", u."Username", r."CreatedOn", u0."Username", r."ModifiedOn"
+                                                                  FROM "Roles" AS r
+                                                                  INNER JOIN "Users" AS u ON r."CreatedById" = u."Id"
+                                                                  INNER JOIN "Users" AS u0 ON r."ModifiedById" = u0."Id"
+                                                                  WHERE r."Id" = @id
+                                                                  LIMIT 1
+                                                             """, new {id = id});
+    }
 
     public async Task<ElderlyCareSupport.Domain.Entities.Identity.Role?> AddAsync(ElderlyCareSupport.Domain.Entities.Identity.Role role)
     {

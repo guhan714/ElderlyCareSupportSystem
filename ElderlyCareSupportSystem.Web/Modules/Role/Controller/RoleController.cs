@@ -88,6 +88,19 @@ public sealed class RoleController : Microsoft.AspNetCore.Mvc.Controller
         return Json(new {success = roleCreated.IsSuccess, message = roleCreated.Message, redirecturl = Url.Action("Index")});
     }
 
+    [HttpGet]
+    public async Task<IActionResult> Detail(Guid roleId)
+    {
+        if (roleId == Guid.Empty)
+            throw new ArgumentException("Role Id cannot be empty");
+        
+        var role = await _roleService.GetDetailsAsync(roleId);
+        if(!role.IsSuccess)
+            return View(role.Data);
+        
+        return View(role.Data);
+    }
+
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Delete([FromBody]Guid roleId)

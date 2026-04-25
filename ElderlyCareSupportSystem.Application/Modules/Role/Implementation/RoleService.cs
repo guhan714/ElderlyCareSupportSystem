@@ -33,6 +33,17 @@ public sealed class RoleService : IRoleService
         return Result<RoleViewModel>.Success(roleViewResult);
     }
 
+    public async Task<Result<RoleViewModel>> GetDetailsAsync(Guid roleId)
+    {
+        var roleDto = await _roleRepository.GetDetailsByIdAsync(roleId);
+        if (roleDto is null)
+            return Result<RoleViewModel>.Fail("Role not found");
+        
+        var result = _mapper.ToViewModel(roleDto);
+        
+        return Result<RoleViewModel>.Success(result);
+    }
+
     public async Task<Result> CreateRoleAsync(RoleDto role, Guid userId)
     {
         var roleDomain = _mapper.ToUser(role);
