@@ -25,7 +25,7 @@ public sealed class AuthenticationService : IAuthService
         var isValidPassword = _hashingService.VerifyHashedPassword(user.PasswordHash, userData.Password);
         if (!isValidPassword)
             return Result<UserViewModel>.Fail("Invalid password");
-        var userViewModel = new UserViewModel() { UserName = user.UserName, Email = user.Email, Role = user.Role };
+        var userViewModel = new UserViewModel() { Id = user.UserId, UserName = user.UserName, Email = user.Email, Role = user.Role };
         return Result<UserViewModel>.Success(userViewModel);
     }
 }

@@ -1,5 +1,4 @@
 using ElderlyCareSupportSystem.Application.Models.DTO;
-using ElderlyCareSupportSystem.Application.Models.ViewModels;
 
 namespace ElderlyCareSupportSystem.Application.Modules.Users.Mapper;
 

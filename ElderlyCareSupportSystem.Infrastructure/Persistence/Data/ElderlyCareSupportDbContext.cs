@@ -43,7 +43,7 @@ public class ElderlyCareSupportDbContext : DbContext
 
     public DbSet<User> Users { get; set; }
     public DbSet<Role> Roles { get; set; }
-    
+    public DbSet<AuditEntry>  AuditEntries { get; set; }
     
     public DbSet<Country> Countries { get; set; }
     

@@ -1,5 +1,4 @@
 using Dapper;
-using ElderlyCareSupportSystem.Application.Modules.Company.Contracts;
 using ElderlyCareSupportSystem.Application.Modules.CompanyModule.Contracts;
 using ElderlyCareSupportSystem.Infrastructure.Persistence.Data;
 
