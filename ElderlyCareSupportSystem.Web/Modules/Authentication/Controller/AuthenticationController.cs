@@ -42,7 +42,7 @@ public class AuthenticationController : Microsoft.AspNetCore.Mvc.Controller
 
         var claims = new List<Claim>
         {
-            new Claim(ClaimTypes.NameIdentifier, authenticationResult.Data.UserName),
+            new Claim(ClaimTypes.NameIdentifier, authenticationResult.Data.Id.ToString()),
             new Claim(ClaimTypes.Email, authenticationResult.Data.Email),
             new Claim(ClaimTypes.Role, authenticationResult.Data.Role)
         };

@@ -16,10 +16,11 @@ public sealed class Role
     public DateTime CreatedOn { get; set; }
     public Guid CreatedById { get; set; }
     [ForeignKey(nameof(CreatedById))]
-    public User CreatedBy { get; set; }
+    public User? CreatedBy { get; set; }
 
     public DateTime ModifiedOn { get; set; }
     [ForeignKey(nameof(ModifiedById))]
     public Guid ModifiedById { get; set; }
-    public User ModifiedBy { get; set; }
+    public User? ModifiedBy { get; set; }
+    public bool IsActive { get; set; }
 }

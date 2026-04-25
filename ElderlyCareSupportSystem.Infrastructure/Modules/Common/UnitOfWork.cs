@@ -1,5 +1,4 @@
 using ElderlyCareSupportSystem.Application.Modules.Common.Contracts;
-using ElderlyCareSupportSystem.Application.Modules.Company.Contracts;
 using ElderlyCareSupportSystem.Application.Modules.CompanyModule.Contracts;
 using ElderlyCareSupportSystem.Application.Modules.Country.Contracts;
 using ElderlyCareSupportSystem.Application.Modules.User.Contracts;

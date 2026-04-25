@@ -7,12 +7,12 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
     <link rel="stylesheet" href="~/lib/datatable/css/datatable.css"/>
 </head>
-<body class="">
+<body class="" style="background-color: #FAF9F6">
 @{ await Html.RenderPartialAsync("_SideBar"); }
 <main role="main" class="ml-80 mt-10 p-3">
     @RenderBody()
 </main>
-
+@{ await Html.RenderPartialAsync("_Loader");}
 <footer class="container fixed bottom-0 ml-80 border-top footer text-muted">
     <div class="container p-3 text-center text-muted">
         &copy; 2026 - ElderlyCareSupportSystem.Web - <a asp-area="" asp-controller="Home"

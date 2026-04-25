@@ -20,7 +20,7 @@ public sealed class AuthenticationRepository : IAuthenticationRepository
     {
         using var connection = _dapperDbContext.CreateConnection();
         return await connection.QueryFirstOrDefaultAsync<UserDto>("""
-                                                                  SELECT u."Username", u."Email", u."PasswordHash", r."Name" AS Role FROM "Users" AS u INNER JOIN "Roles" AS r ON u."RoleId" = r."Id" WHERE u."Username" = @username;
+                                                                  SELECT u."Id" as UserId, u."Username", u."Email", u."PasswordHash", r."Name" AS Role FROM "Users" AS u INNER JOIN "Roles" AS r ON u."RoleId" = r."Id" WHERE u."Username" = @username;
                                                                   """, new { username = username });
     }
 }

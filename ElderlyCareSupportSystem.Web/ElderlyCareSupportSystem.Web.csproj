@@ -69,9 +69,4 @@
     <_ContentIncludedByDefault Remove="Views\Role\Index.cshtml" />
   </ItemGroup>
 
-  <ItemGroup>
-    <AdditionalFiles Include="Modules\Role\Create.cshtml" />
-    <AdditionalFiles Include="Modules\Role\Index.cshtml" />
-  </ItemGroup>
-
 </Project>

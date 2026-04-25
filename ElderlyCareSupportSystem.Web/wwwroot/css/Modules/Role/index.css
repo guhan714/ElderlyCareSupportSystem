@@ -1,0 +1,26 @@
+#SNo{
+    width: 5% !important;
+    text-align: center !important;
+}
+
+#Code{
+    width: 10% !important;
+    text-align: center !important;
+}
+
+#Name{
+    width: 15% !important;
+}
+
+#Description{
+    width: 60% !important;
+}
+
+#Option{
+    width: 10% !important;
+    text-align: center !important;
+}
+
+tr {
+    background-color: #7F00FF;
+}

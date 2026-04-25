@@ -1,6 +1,6 @@
+using ElderlyCareSupport.Domain.Entities;
 using ElderlyCareSupportSystem.Application.Modules.Authentication.Contracts;
 using ElderlyCareSupportSystem.Application.Modules.Common.Contracts;
-using ElderlyCareSupportSystem.Application.Modules.Company.Contracts;
 using ElderlyCareSupportSystem.Application.Modules.CompanyModule.Contracts;
 using ElderlyCareSupportSystem.Application.Modules.Country.Contracts;
 using ElderlyCareSupportSystem.Application.Modules.Role.Contracts;
@@ -28,8 +28,10 @@ public static class DependencyInjection
     {
         services.AddDbContext<ElderlyCareSupportDbContext>(options =>
         {
-            options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"));
+            options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"))
+                .AddInterceptors(new EfCoreInterceptor());
         });
+
 
         services.AddScoped<DapperDbContext>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();

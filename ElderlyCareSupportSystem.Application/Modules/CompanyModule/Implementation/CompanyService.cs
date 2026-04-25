@@ -6,11 +6,10 @@ using ElderlyCareSupportSystem.Application.Modules.Common.Contracts;
 using ElderlyCareSupportSystem.Application.Modules.Company.Contracts;
 using ElderlyCareSupportSystem.Application.Modules.CompanyModule.Contracts;
 using ElderlyCareSupportSystem.Application.Modules.Security.Contracts;
-using ElderlyCareSupportSystem.Application.Modules.User.Contracts;
 using ElderlyCareSupportSystem.Application.Modules.Users.Mapper;
 using DtoMapper = ElderlyCareSupportSystem.Application.Mappers.DataTransfer.DtoMapper;
 
-namespace ElderlyCareSupportSystem.Application.Modules.Company.Implementation;
+namespace ElderlyCareSupportSystem.Application.Modules.CompanyModule.Implementation;
 
 public sealed class CompanyService : ICompanyService
 {

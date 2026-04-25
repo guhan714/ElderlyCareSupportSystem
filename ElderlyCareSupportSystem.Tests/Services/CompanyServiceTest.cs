@@ -2,9 +2,8 @@
 using ElderlyCareSupportSystem.Application.Mappers.Domain.DomainMapper;
 using ElderlyCareSupportSystem.Application.Models.ViewModels;
 using ElderlyCareSupportSystem.Application.Modules.Common.Contracts;
-using ElderlyCareSupportSystem.Application.Modules.Company.Contracts;
-using ElderlyCareSupportSystem.Application.Modules.Company.Implementation;
 using ElderlyCareSupportSystem.Application.Modules.CompanyModule.Contracts;
+using ElderlyCareSupportSystem.Application.Modules.CompanyModule.Implementation;
 using ElderlyCareSupportSystem.Application.Modules.Security.Contracts;
 using ElderlyCareSupportSystem.Application.Modules.User.Contracts;
 using ElderlyCareSupportSystem.Infrastructure.Modules.Security;

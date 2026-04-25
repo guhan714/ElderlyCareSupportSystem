@@ -3,10 +3,11 @@ using ElderlyCareSupportSystem.Application.Mappers.Domain.DomainMapper;
 using ElderlyCareSupportSystem.Application.Modules.Authentication.Contracts;
 using ElderlyCareSupportSystem.Application.Modules.Authentication.Implementation;
 using ElderlyCareSupportSystem.Application.Modules.Company.Contracts;
-using ElderlyCareSupportSystem.Application.Modules.Company.Implementation;
+using ElderlyCareSupportSystem.Application.Modules.CompanyModule.Implementation;
 using ElderlyCareSupportSystem.Application.Modules.Country.Contracts;
 using ElderlyCareSupportSystem.Application.Modules.Role.Contracts;
 using ElderlyCareSupportSystem.Application.Modules.Role.Implementation;
+using ElderlyCareSupportSystem.Application.Modules.Role.Mapper;
 using ElderlyCareSupportSystem.Application.Modules.User.Contracts;
 using ElderlyCareSupportSystem.Application.Modules.User.Implementation;
 using ElderlyCareSupportSystem.Application.Validations;
@@ -23,6 +24,7 @@ public static class DependencyInjection
         services.AddValidatorsFromAssembly(typeof(CompanyValidator).Assembly);
         services.AddScoped<DomainMapper>();
         services.AddScoped<DtoMapper>();
+        services.AddScoped<RoleMapper>();
 
         services.AddScoped<ICompanyService, CompanyService>();
         services.AddScoped<ICountryService, CountryService>();
