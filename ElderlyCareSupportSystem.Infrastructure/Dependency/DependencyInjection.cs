@@ -1,4 +1,3 @@
-using ElderlyCareSupport.Domain.Entities;
 using ElderlyCareSupportSystem.Application.Modules.Authentication.Contracts;
 using ElderlyCareSupportSystem.Application.Modules.Common.Contracts;
 using ElderlyCareSupportSystem.Application.Modules.CompanyModule.Contracts;

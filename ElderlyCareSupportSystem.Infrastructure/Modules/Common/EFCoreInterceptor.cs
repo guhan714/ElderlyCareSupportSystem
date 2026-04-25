@@ -1,6 +1,5 @@
 using System.Text.Json;
 using ElderlyCareSupport.Domain.Entities;
-using ElderlyCareSupportSystem.Infrastructure.Persistence.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
