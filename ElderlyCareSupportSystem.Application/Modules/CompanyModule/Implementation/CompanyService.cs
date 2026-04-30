@@ -35,7 +35,7 @@ public sealed class CompanyService : ICompanyService
         try
         {
             var companyEntity = _domainMapper.ToCompany(company);
-            companyEntity.Id = Guid.NewGuid();
+            companyEntity.Id = Guid.CreateVersion7();
 
             var user = MapUserDto(company, companyEntity);
 
