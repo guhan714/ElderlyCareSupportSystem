@@ -33,7 +33,7 @@ public static class Program
             builder.Services.AddAuthentication("ElderlyCareSupportCookie")
                 .AddCookie("ElderlyCareSupportCookie", options =>
                 {
-                    options.LoginPath = "/Auth/Login";
+                    options.LoginPath = new PathString("/Auth/Login");
                     options.Cookie.HttpOnly = true;
                     options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
                     options.SlidingExpiration = true;

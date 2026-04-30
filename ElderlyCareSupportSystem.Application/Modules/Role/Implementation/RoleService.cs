@@ -47,7 +47,7 @@ public sealed class RoleService : IRoleService
     public async Task<Result> CreateRoleAsync(RoleDto role, Guid userId)
     {
         var roleDomain = _mapper.ToUser(role);
-        roleDomain.Id = Guid.NewGuid();
+        roleDomain.Id = Guid.CreateVersion7();
         roleDomain.CreatedById = userId;
         roleDomain.CreatedBy = null;
         roleDomain.CreatedOn = DateTime.UtcNow;
